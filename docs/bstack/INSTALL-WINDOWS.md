@@ -13,10 +13,16 @@ git clone https://github.com/BillBalint-SM/bstack-workbook.git bstack
 Set-Location bstack
 bun install --frozen-lockfile
 if ($LASTEXITCODE -ne 0) { throw 'Dependency install failed' }
-$env:BUN_CMD = (Get-Command bun -CommandType Application).Source.Replace('\','/')
-$gitRoot = Split-Path (Split-Path (Get-Command git -CommandType Application).Source -Parent) -Parent
-$gitBash = Join-Path $gitRoot 'bin\bash.exe'
-if (-not (Test-Path -LiteralPath $gitBash)) { throw 'Git Bash not found' }
+$bunExe = (Get-Command bun -CommandType Application | Select-Object -First 1).Source
+$env:BUN_CMD = $bunExe.Replace('\','/')
+$gitBash = Get-Command git -CommandType Application |
+  ForEach-Object {
+    $root = Split-Path (Split-Path $_.Source -Parent) -Parent
+    Join-Path $root 'bin\bash.exe'
+  } |
+  Where-Object { Test-Path -LiteralPath $_ } |
+  Select-Object -First 1
+if (-not $gitBash) { throw 'Git Bash not found' }
 & $gitBash scripts/build.sh
 if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
 $releaseRoot = Join-Path $env:LOCALAPPDATA 'bstack\releases\0.1.0-beta.1'

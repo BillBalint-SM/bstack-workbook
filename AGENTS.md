@@ -12,17 +12,9 @@ starting point, not a runtime dependency or a set of release promises.
 ## Build and package
 
 The checked-in `plugin/bstack` directory is a build input and has no plugin
-manifest. Never install it directly. Generate the Codex skills and wrappers,
-then package the runtime into a separate versioned directory:
-
-```powershell
-bun install --frozen-lockfile
-$env:BUN_CMD = (Get-Command bun -CommandType Application).Source.Replace('\','/')
-$gitRoot = Split-Path (Split-Path (Get-Command git -CommandType Application).Source -Parent) -Parent
-& (Join-Path $gitRoot 'bin\bash.exe') scripts/build.sh
-bun scripts/package-bstack.ts C:\path\to\new-release\bstack
-bun scripts/check-bstack-package.ts C:\path\to\new-release\bstack
-```
+manifest. Never install it directly. Use the PowerShell commands in
+`docs/bstack/INSTALL-WINDOWS.md` to generate the Codex skills and wrappers,
+then package the runtime into a separate versioned directory.
 
 The `SKILL.md` renders under `.agents/skills` are generated from `.tmpl`
 files. Edit the template or resolver, then run `bun run gen:skill-docs --host

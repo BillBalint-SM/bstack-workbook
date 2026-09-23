@@ -12,33 +12,12 @@ hosts are outside this product's scope.
 
 ## Build on Windows
 
-Install Git, Bun, Git Bash, jq, PowerShell and Codex. In a fresh checkout,
-run these commands in PowerShell:
-
-```powershell
-bun install --frozen-lockfile
-if ($LASTEXITCODE -ne 0) { throw 'Dependency install failed' }
-$env:BUN_CMD = (Get-Command bun -CommandType Application).Source.Replace('\','/')
-$gitRoot = Split-Path (Split-Path (Get-Command git -CommandType Application).Source -Parent) -Parent
-$gitBash = Join-Path $gitRoot 'bin\bash.exe'
-& $gitBash scripts/build.sh
-if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
-$releaseRoot = Join-Path $env:LOCALAPPDATA 'bstack\releases\0.1.0-beta.1'
-bun scripts/package-bstack.ts (Join-Path $releaseRoot 'bstack')
-if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
-bun scripts/check-bstack-package.ts (Join-Path $releaseRoot 'bstack')
-```
-
-The output is a local Codex plugin at `$releaseRoot\bstack`, with a
-marketplace catalog at `$releaseRoot\.agents\plugins\marketplace.json`.
-The bundled plugin uses its own `runtime` folder. Moving or editing the
-source checkout does not change that installed runtime. The default data
-location is `~/.bstack/state`.
-
-The detailed [Windows installation guide](docs/bstack/INSTALL-WINDOWS.md)
-covers local marketplace registration, Codex hook trust, removal and the
-planned clean GitHub clone acceptance test. Installing the source
-`plugin/bstack` directory directly is unsupported; use the generated package.
+Install Git, Bun, Git Bash, jq, PowerShell and Codex, then follow the
+[Windows installation guide](docs/bstack/INSTALL-WINDOWS.md). It covers the
+GitHub clone, build, package check and Codex installation. The built plugin
+contains its own runtime and stores user data under `~/.bstack/state` by
+default. Installing the source `plugin/bstack` directory directly is
+unsupported; use the generated package.
 
 ## Scope and evidence
 
