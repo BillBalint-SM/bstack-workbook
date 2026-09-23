@@ -1,0 +1,53 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -File \"${PLUGIN_ROOT}/scripts/bstack.ps1\" -Mode hook",
+            "commandWindows": "powershell.exe -NoProfile -File \"${PLUGIN_ROOT}/scripts/bstack.ps1\" -Mode hook",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "(^|[._])request_user_input$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -File \"${PLUGIN_ROOT}/scripts/bstack.ps1\" -Mode questions",
+            "commandWindows": "powershell.exe -NoProfile -File \"${PLUGIN_ROOT}/scripts/bstack.ps1\" -Mode questions",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "(^|[._])request_user_input$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -File \"${PLUGIN_ROOT}/scripts/bstack.ps1\" -Mode questions",
+            "commandWindows": "powershell.exe -NoProfile -File \"${PLUGIN_ROOT}/scripts/bstack.ps1\" -Mode questions",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -File \"${PLUGIN_ROOT}/scripts/bstack.ps1\" -Mode lifecycle",
+            "commandWindows": "powershell.exe -NoProfile -File \"${PLUGIN_ROOT}/scripts/bstack.ps1\" -Mode lifecycle",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
