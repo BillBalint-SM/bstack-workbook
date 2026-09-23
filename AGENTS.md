@@ -1,5 +1,9 @@
 # bstack source repository
 
+For the independent Windows/Codex target, read `docs/MVP-PLAN.md` first.
+The current source is a prototype; its build instructions describe this
+checkout and are not the implementation plan for the independent package.
+
 Projektalapozás: kész. A karbantartott forrás a gyökérben lévő skillmodulokban,
 `scripts/`, `bin/`, `browse/`, `design/`, `make-pdf/`, `lib/` és `plugin/bstack/`
 alatt található; a használati leírás a `README.md` és `docs/bstack/INSTALL-WINDOWS.md`.

@@ -1,5 +1,9 @@
 # bstack
 
+The [Windows/Codex MVP implementation plan](docs/MVP-PLAN.md) defines the
+independent target package and its release gates. This checkout remains a
+prototype; publishing the plan does not certify the current code for release.
+
 bstack is a Windows x64 skill package for Codex. It adapts the engineering
 workflows of [gstack](https://github.com/garrytan/gstack) into an installable
 Codex plugin with its own runtime, state directory and local marketplace.
