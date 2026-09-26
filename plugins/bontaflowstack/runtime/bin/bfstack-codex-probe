@@ -221,6 +221,6 @@ _bfstack_codex_log_hang() {
   local _log_bin="$_probe_dir/bfstack-learnings-log"
   [ -x "$_log_bin" ] || return 0
   local _key="codex-hang-$(date +%s 2>/dev/null || echo unknown)"
-  "$_log_bin" "$(printf '{"skill":"codex","type":"operational","key":"%s","insight":"Codex timed out after 600s during [%s] invocation. Prompt size: %s. Consider splitting prompt or checking network.","confidence":8,"source":"observed","files":["codex/SKILL.md.tmpl","autoplan/SKILL.md.tmpl"]}' "$_key" "$_mode" "$_prompt_size")" \
+  "$_log_bin" "$(printf '{"skill":"codex","type":"operational","key":"%s","insight":"Codex timed out after 600s during [%s] invocation. Prompt size: %s. Consider splitting prompt or checking network.","confidence":8,"source":"observed","files":["plugins/bontaflowstack/runtime/bin/bfstack-codex-probe"]}' "$_key" "$_mode" "$_prompt_size")" \
     >/dev/null 2>&1 || true
 }

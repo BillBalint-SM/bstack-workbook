@@ -46,11 +46,7 @@ interface SnapshotOptions {
 }
 
 /**
- * Snapshot flag metadata — single source of truth for CLI parsing and doc generation.
- *
- * Imported by:
- *   - gen-skill-docs.ts (generates {{SNAPSHOT_FLAGS}} tables)
- *   - skill-parser.ts (validates flags in SKILL.md examples)
+ * Snapshot flag metadata for CLI parsing.
  */
 export const SNAPSHOT_FLAGS: Array<{
   short: string;
@@ -689,4 +685,3 @@ export async function handleSnapshot(
 
   return stripLoneSurrogates(output.join('\n'));
 }
-

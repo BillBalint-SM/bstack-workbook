@@ -1,10 +1,7 @@
 /**
  * redact-patterns — the canonical redaction taxonomy.
  *
- * Single source of truth shared by the redaction engine, its command wrappers,
- * and (via `scripts/resolvers/redact-doc.ts`) the
- * generated SKILL.md docs for /spec, /ship, /cso, /document-release, and
- * /document-generate.
+ * Shared by the redaction engine and its command wrappers.
  *
  * Design notes (locked in /plan-eng-review + two Codex passes):
  *

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Output the remote slug (owner-repo) for the current git repo.
-# Used by SKILL.md files to derive project-specific paths in ~/.bfstack/projects/.
+# Used by skills to derive project-specific paths under BFSTACK_HOME/projects/.
 set -e
 URL=$(git remote get-url origin 2>/dev/null || true)
 if [ -n "$URL" ]; then
@@ -12,4 +12,3 @@ if [ -n "$URL" ]; then
 else
   basename "$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 fi
-

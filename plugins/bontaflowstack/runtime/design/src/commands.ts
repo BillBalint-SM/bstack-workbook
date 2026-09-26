@@ -1,12 +1,9 @@
 /**
  * Command registry — single source of truth for all design commands.
  *
- * Dependency graph:
- *   commands.ts ──▶ cli.ts (runtime dispatch)
- *              ──▶ gen-skill-docs.ts (doc generation)
- *              ──▶ tests (validation)
+ * Used by cli.ts for runtime dispatch.
  *
- * Zero side effects. Safe to import from build scripts and tests.
+ * Zero side effects.
  */
 
 export const COMMANDS = new Map<string, {
@@ -66,7 +63,7 @@ export const COMMANDS = new Map<string, {
   }],
   ["gallery", {
     description: "Generate HTML timeline of all design explorations for a project",
-    usage: "gallery --designs-dir ~/.bfstack/projects/$SLUG/designs/ --output /path/gallery.html",
+    usage: "gallery --designs-dir <state-root>/projects/<slug>/designs/ --output <output.html>",
     flags: ["--designs-dir", "--output"],
   }],
   ["serve", {
@@ -85,4 +82,3 @@ export const COMMANDS = new Map<string, {
     flags: [],
   }],
 ]);
-

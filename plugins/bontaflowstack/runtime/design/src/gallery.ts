@@ -8,7 +8,7 @@ import fs from "fs";
 import path from "path";
 
 export interface GalleryOptions {
-  designsDir: string; // ~/.bfstack/projects/$SLUG/designs/
+  designsDir: string; // BFSTACK_HOME/projects/$SLUG/designs/
   output: string;
 }
 
@@ -249,4 +249,3 @@ export function gallery(options: GalleryOptions): void {
   fs.writeFileSync(options.output, html);
   console.log(JSON.stringify({ outputPath: options.output }));
 }
-

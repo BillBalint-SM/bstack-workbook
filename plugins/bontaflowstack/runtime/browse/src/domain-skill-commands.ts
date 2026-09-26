@@ -37,6 +37,8 @@ import {
   promoteToGlobal,
   rollbackSkill,
   deleteSkill,
+  globalFile,
+  projectFile,
   type DomainSkillRow,
   type SkillScope,
 } from './domain-skills';
@@ -75,7 +77,7 @@ function formatSavedOk(row: DomainSkillRow, slug: string): string {
     `Host: ${row.host}`,
     `Bytes: ${row.body.length}`,
     `Version: ${row.version}`,
-    `Stored at: ~/.bfstack/projects/${slug}/learnings.jsonl`,
+    `Stored at: ${projectFile(slug)}`,
     '',
     `Next: skill is quarantined and won't fire in prompts until used 3 times`,
     `      without classifier flags. Run $B domain-skill list to see state.`,
@@ -220,7 +222,7 @@ async function handlePromoteToGlobal(args: string[]): Promise<string> {
   const row = await promoteToGlobal(host, slug);
   return [
     `Promoted ${row.host} to global scope (v${row.version}).`,
-    `Stored at: ~/.bfstack/global-domain-skills.jsonl`,
+    `Stored at: ${globalFile()}`,
     '',
     `This skill now fires for all projects unless they have a per-project skill for the same host.`,
   ].join('\n');

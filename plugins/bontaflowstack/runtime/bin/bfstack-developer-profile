@@ -21,9 +21,8 @@
 #                       sessions[] and update aggregates. Required fields:
 #                       date, mode. Silent skip on invalid input.
 #
-# Profile file: ~/.bfstack/developer-profile.json (unified schema — see
-# docs/designs/PLAN_TUNING_V0.md). Event file: ~/.bfstack/projects/{SLUG}/
-# question-events.jsonl.
+# Profile file: $BFSTACK_HOME/developer-profile.json. Event file:
+# $BFSTACK_HOME/projects/{SLUG}/question-events.jsonl.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -526,4 +525,3 @@ case "$CMD" in
     exit 1
     ;;
 esac
-

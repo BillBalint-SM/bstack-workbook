@@ -1,26 +1,19 @@
 // lib/design-catalog.ts — bfstack's design anti-pattern vocabulary, typed.
-// Derived in part from pbakaus/impeccable (Apache-2.0), modified. See NOTICE.md.
+// Derived in part from pbakaus/impeccable (Apache-2.0), modified. See ../../licenses/upstream-NOTICE.md.
 //
 // Pure module: no I/O, no imports from scripts/. bin/ and lib/ travel together
 // on every host, scripts/ is never linked, so anything runtime may import this
 // and nothing here may import scripts/.
 //
-//   lib/design-catalog.ts
-//     ├─ scripts/resolvers/constants.ts          AI_SLOP_BLACKLIST: the 11 legacy lines, verbatim, in order
-//     ├─ scripts/resolvers/design.ts             DESIGN_METHODOLOGY cat 9, DESIGN_HARD_RULES, DESIGN_DETECTOR
-//     │                                          (handoffs), OVERUSED_FONTS, DESIGN_SLOP_BULLETS, and the
-//     │                                          design-html anti-slop line (catalogEntries)
-//     ├─ scripts/resolvers/design-checklist.ts   review/design-checklist.md (generated)
-//     ├─ bin/bfstack-design-detect.ts             normalizes engine findings by impeccableId
-//     └─ design/src/brief.ts                     MOCKUP_NEVER_NAMES in the image-generation prompt
+// The packaged detector in runtime/bin/bfstack-design-detect.ts maps engine
+// findings through this catalog. The source-generation paths used upstream are
+// recorded in docs/workflow-adoption.json, not shipped as runtime dependencies.
 //
 // Rule ids. An entry's `impeccableId` is set only when that id exists in
-// test/fixtures/impeccable-antipatterns.json (test-enforced), and rendered
+// the pinned impeccable rule set, and rendered
 // prose brackets an id only in that case, so a reader never meets a bracketed
 // id the detector cannot emit. Everything else is a bfstack-only tell that the
-// LLM pass judges. The four lists this file replaced (constants.ts, the
-// consultation proposal section, design-html's blacklist, and the review
-// checklist) had drifted apart; they now render from here.
+// LLM pass judges.
 
 export type SlopCategory =
   | 'scaffold' | 'surface' | 'type' | 'color' | 'layout'
@@ -737,4 +730,3 @@ export function catalogEntries(ids: string[]): DesignSlopEntry[] {
     return e;
   });
 }
-

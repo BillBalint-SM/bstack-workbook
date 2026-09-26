@@ -2,7 +2,7 @@
  * Auth resolution for OpenAI API access.
  *
  * Resolution order:
- * 1. ~/.bfstack/openai.json → { "api_key": "sk-..." }
+ * 1. The selected BFSTACK_HOME/openai.json → { "api_key": "sk-..." }
  * 2. OPENAI_API_KEY environment variable
  * 3. null (caller handles guided setup or fallback)
  *
@@ -14,6 +14,7 @@
  */
 
 import fs from "fs";
+import os from "os";
 import path from "path";
 
 type ApiKeySource = "config" | "env";
@@ -25,9 +26,9 @@ export interface ApiKeyResolution {
   warning?: string;
 }
 
-function configPath(): string {
+export function configPath(): string {
   const stateRoot = process.env.BFSTACK_HOME || process.env.BFSTACK_STATE_ROOT || process.env.BFSTACK_STATE_DIR;
-  return path.join(stateRoot || process.env.HOME || "~", stateRoot ? "openai.json" : ".bfstack/openai.json");
+  return path.join(stateRoot || path.join(os.homedir(), ".bfstack"), "openai.json");
 }
 
 function readEnvValue(filePath: string, key: string): string | null {
@@ -70,7 +71,7 @@ function matchingCwdEnvFile(key: string, value: string): string | null {
 }
 
 export function resolveApiKeyInfo(): ApiKeyResolution | null {
-  // 1. Check ~/.bfstack/openai.json
+  // 1. Check the selected state root's openai.json
   try {
     const authPath = configPath();
     if (fs.existsSync(authPath)) {
@@ -88,7 +89,7 @@ export function resolveApiKeyInfo(): ApiKeyResolution | null {
   if (process.env.OPENAI_API_KEY) {
     const envFile = matchingCwdEnvFile("OPENAI_API_KEY", process.env.OPENAI_API_KEY);
     const warning = envFile
-      ? `Warning: OPENAI_API_KEY matches ${envFile} in the current directory. Design generation may bill that project's OpenAI account. Run $D setup to store a bfstack-specific key in ~/.bfstack/openai.json.`
+      ? `Warning: OPENAI_API_KEY matches ${envFile} in the current directory. Design generation may bill that project's OpenAI account. Run $D setup to store a bfstack-specific key in ${configPath()}.`
       : undefined;
     return { key: process.env.OPENAI_API_KEY, source: "env", envFile: envFile ?? undefined, warning };
   }
@@ -101,13 +102,13 @@ export function resolveApiKey(): string | null {
 }
 
 export function describeApiKeySource(resolution: ApiKeyResolution): string {
-  if (resolution.source === "config") return "~/.bfstack/openai.json";
+  if (resolution.source === "config") return configPath();
   if (resolution.envFile) return `OPENAI_API_KEY environment variable (matches ${resolution.envFile} in current directory)`;
   return "OPENAI_API_KEY environment variable";
 }
 
 /**
- * Save an API key to ~/.bfstack/openai.json with 0600 permissions.
+ * Save an API key to the selected state root with 0600 permissions.
  */
 export function saveApiKey(key: string): void {
   const dir = path.dirname(configPath());
@@ -128,7 +129,7 @@ export function requireApiKey(): string {
     console.error("No OpenAI API key found.");
     console.error("");
     console.error("Run: $D setup");
-    console.error("  or save to ~/.bfstack/openai.json: { \"api_key\": \"sk-...\" }");
+    console.error(`  or save to ${configPath()}: { "api_key": "sk-..." }`);
     console.error("  or set OPENAI_API_KEY environment variable");
     console.error("");
     console.error("Get a key at: https://platform.openai.com/api-keys");

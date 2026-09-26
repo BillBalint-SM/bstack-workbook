@@ -419,8 +419,7 @@ function parseArgs(argv: string[]): { base: string; bump: Bump; current: string;
   if (!base) {
     // Detect the default branch instead of assuming main (local-only repos
     // on trunk/master work like GitHub repos on main). Same probe order as
-    // the canonical chain in bin/bfstack-diff-scope and {{BASE_BRANCH_DETECT}}
-    // (scripts/resolvers/utility.ts): origin/HEAD -> origin/main ->
+    // the chain in bin/bfstack-diff-scope: origin/HEAD -> origin/main ->
     // origin/master -> literal "main". origin/HEAD is unset on plain clones
     // that never ran `git remote set-head`, so the rev-parse probes matter.
     try {
@@ -795,4 +794,3 @@ if (import.meta.main) {
     process.exit(3);
   });
 }
-

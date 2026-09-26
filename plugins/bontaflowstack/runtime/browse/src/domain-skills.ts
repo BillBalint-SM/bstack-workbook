@@ -3,8 +3,8 @@
  * alongside /learn's per-project learnings as type:"domain" rows.
  *
  * Scope:
- *   - per-project: ~/.bfstack/projects/<slug>/learnings.jsonl
- *   - global:      ~/.bfstack/global-domain-skills.jsonl
+ *   - per-project: BFSTACK_HOME/projects/<slug>/learnings.jsonl
+ *   - global:      BFSTACK_HOME/global-domain-skills.jsonl
  *
  * State machine (T6 — defense against persistent prompt poisoning):
  *
@@ -66,11 +66,11 @@ function bfstackHome(): string {
   return process.env.BFSTACK_HOME || path.join(os.homedir(), '.bfstack');
 }
 
-function globalFile(): string {
+export function globalFile(): string {
   return path.join(bfstackHome(), 'global-domain-skills.jsonl');
 }
 
-function projectFile(slug: string): string {
+export function projectFile(slug: string): string {
   return path.join(bfstackHome(), 'projects', slug, 'learnings.jsonl');
 }
 
@@ -436,4 +436,3 @@ export async function deleteSkill(host: string, projectSlug: string, scope: Skil
   };
   await appendRow(file, tombstone);
 }
-

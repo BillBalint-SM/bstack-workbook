@@ -75,7 +75,7 @@
  * whose realpath lies inside the repo or cwd are ignored (IMPECCABLE_ENV_IGNORED).
  *
  * Non-sink: this spawns a third-party binary the user installed over local
- * paths; bfstack does not audit that engine's network behavior (NOTICE.md).
+ * paths; bfstack does not audit that engine's network behavior (../../licenses/upstream-NOTICE.md).
  */
 import * as fs from 'fs';
 import * as os from 'os';

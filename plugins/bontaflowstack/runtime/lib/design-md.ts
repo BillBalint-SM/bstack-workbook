@@ -2,7 +2,7 @@
 //
 // Implements the DESIGN.md specification (google-labs-code/design.md, Google LLC,
 // Apache-2.0): YAML front matter carrying the design tokens, a markdown body in
-// eight canonical `##` sections. See NOTICE.md. Pure module: no I/O, no imports
+// eight canonical `##` sections. See ../../licenses/upstream-NOTICE.md. Pure module: no I/O, no imports
 // from scripts/; bin/bfstack-design-md.ts and design/src/memory.ts do the file work.
 //
 //   text ──► parseDesignMd ──► DesignMdDoc { frontmatterText (bytes preserved), frontmatter, marker,

@@ -3,11 +3,11 @@
  *
  * Unlike the browse binary (persistent Chromium daemon), the design binary
  * is stateless: each invocation makes API calls and writes files. Session
- * state for multi-turn iteration is a JSON file in /tmp.
+ * state for multi-turn iteration is a JSON file in the system temp directory.
  *
  * Flow:
  *   1. Parse command + flags from argv
- *   2. Resolve auth (~/. bfstack/openai.json → OPENAI_API_KEY → guided setup)
+ *   2. Resolve auth (selected state root → OPENAI_API_KEY → guided setup)
  *   3. Execute command (API call → write PNG/HTML)
  *   4. Print result JSON to stdout
  */
@@ -18,7 +18,9 @@ import { checkCommand } from "./check";
 import { compare } from "./compare";
 import { variants } from "./variants";
 import { iterate } from "./iterate";
-import { resolveApiKey, saveApiKey } from "./auth";
+import { configPath, resolveApiKey, saveApiKey } from "./auth";
+import os from "os";
+import path from "path";
 import { extractDesignLanguage, updateDesignMd } from "./memory";
 import { diffMockups, verifyAgainstMockup } from "./diff";
 import { evolve } from "./evolve";
@@ -75,7 +77,7 @@ function printUsage(): void {
     console.log(`  ${name.padEnd(12)} ${info.description}`);
     console.log(`  ${"".padEnd(12)} ${info.usage}`);
   }
-  console.log("\nAuth: ~/.bfstack/openai.json, then OPENAI_API_KEY env var");
+  console.log(`\nAuth: ${configPath()}, then OPENAI_API_KEY env var`);
   console.log("If OPENAI_API_KEY matches a current-directory .env file, the source is reported before billing.");
   console.log("Setup: $D setup");
 }
@@ -102,7 +104,7 @@ async function runSetup(): Promise<void> {
     }
 
     saveApiKey(key);
-    console.log("Key saved to ~/.bfstack/openai.json (0600 permissions).");
+    console.log(`Key saved to ${configPath()} (0600 permissions).`);
   }
 
   // Smoke test
@@ -110,7 +112,7 @@ async function runSetup(): Promise<void> {
   try {
     await generate({
       brief: "A simple blue square centered on a white background. Minimal, geometric, clean.",
-      output: "/tmp/bfstack-design-smoke-test.png",
+      output: path.join(os.tmpdir(), "bfstack-design-smoke-test.png"),
       size: "1024x1024",
       quality: "low",
     });
@@ -136,7 +138,7 @@ async function main(): Promise<void> {
       await generate({
         brief: flags.brief as string,
         briefFile: flags["brief-file"] as string,
-        output: (flags.output as string) || "/tmp/bfstack-mockup.png",
+        output: (flags.output as string) || path.join(os.tmpdir(), "bfstack-mockup.png"),
         check: !!flags.check,
         retry: normalizeIntFlag(flags.retry, { name: "retry", def: 0, min: 0 }),
         size: flags.size as string,
@@ -152,7 +154,7 @@ async function main(): Promise<void> {
       // Parse --images as glob or multiple files
       const imagesArg = flags.images as string;
       const images = await resolveImagePaths(imagesArg);
-      const outputPath = (flags.output as string) || "/tmp/bfstack-design-board.html";
+      const outputPath = (flags.output as string) || path.join(os.tmpdir(), "bfstack-design-board.html");
       compare({ images, output: outputPath });
       // If --serve flag is set, publish the board.
       //   Default: ensure the persistent daemon is up, POST the board, open
@@ -201,7 +203,7 @@ async function main(): Promise<void> {
         // #2032: pass the RAW flag through — variants() normalizes at its
         // consumption site (a pre-parseInt here would silently truncate "3.7").
         count: flags.count,
-        outputDir: (flags["output-dir"] as string) || "/tmp/bfstack-variants/",
+        outputDir: (flags["output-dir"] as string) || path.join(os.tmpdir(), "bfstack-variants"),
         size: flags.size as string,
         quality: flags.quality as string,
         viewports: flags.viewports as string,
@@ -212,7 +214,7 @@ async function main(): Promise<void> {
       await iterate({
         session: flags.session as string,
         feedback: flags.feedback as string,
-        output: (flags.output as string) || "/tmp/bfstack-iterate.png",
+        output: (flags.output as string) || path.join(os.tmpdir(), "bfstack-iterate.png"),
       });
       break;
 
@@ -264,14 +266,14 @@ async function main(): Promise<void> {
       await evolve({
         screenshot: flags.screenshot as string,
         brief: flags.brief as string,
-        output: (flags.output as string) || "/tmp/bfstack-evolved.png",
+        output: (flags.output as string) || path.join(os.tmpdir(), "bfstack-evolved.png"),
       });
       break;
 
     case "gallery":
       gallery({
         designsDir: flags["designs-dir"] as string,
-        output: (flags.output as string) || "/tmp/bfstack-design-gallery.html",
+        output: (flags.output as string) || path.join(os.tmpdir(), "bfstack-design-gallery.html"),
       });
       break;
 
@@ -422,4 +424,3 @@ if (process.argv.includes("--daemon-mode")) {
     process.exit(1);
   });
 }
-

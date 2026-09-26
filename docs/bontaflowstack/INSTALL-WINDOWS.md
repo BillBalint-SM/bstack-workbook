@@ -1,58 +1,29 @@
-# BontaFlowStack installation on Windows
+# Install BontaFlowStack on Windows
 
-**Status:** development candidate. The P3 minimum native probes passed, but
-`nativeAcceptance` for the release and all full workflows remains `NOT_RUN`.
+BontaFlowStack v0.1.4 is a prerelease for Windows x64 Codex Desktop. The Release ZIP passed its package checks. In a separate Windows Sandbox smoke test, the `bfstack` router and `bontaflow-memory` read-only workflow ran; memory returned zero lessons. The full native acceptance campaign remains `NOT_RUN`.
 
-The adjacent `.sha256` file detects ZIP corruption when its value comes from a
-trusted download channel. It is not a release signature.
+## Install
 
-1. Download and extract the BontaFlowStack ZIP to a stable user-writable folder. Keep
-   the extracted root, `.agents/plugins/marketplace.json`, and
-   `plugins/bontaflowstack/` together. The marketplace's `source.path` is relative to
-   that root and resolves to `./plugins/bontaflowstack`.
-2. Open the extracted root as a Codex Desktop project and restart Codex Desktop.
-   In **Plugins Directory**, find the marketplace from that project, then choose
-   **BontaFlowStack** and install it. Codex keeps the installed plugin cache separate
-   from this extracted source.
-3. Start a new Codex task and confirm that the plugin and its `bfstack` entry
-   skill are discoverable. In the BontaFlowStack package, use
-   `$bontaflowstack:bfstack`. The entry skill, helper names, and
-   `open-bfstack-browser` use the short name `bfstack`.
-4. Open **Settings → Hooks**, inspect every listed BontaFlowStack hook, and make the
-   trust decision in the native UI: the general `PreToolUse` safety hook, the
-   `PreToolUse` question hook, the `PostToolUse` question hook, and `Stop`
-   lifecycle hook. This location was confirmed in Desktop `26.917.8451.0`; the
-   first task did not show an automatic trust prompt. Installing the plugin
-   alone does not trust a hook, and changed definitions can require review
-   again. A missing hook or trust refusal is `BLOCKED`. Do not edit trust
-   records or bypass the native decision.
+1. Download `bontaflowstack-0.1.4-deb14b0fadc2424baeb0ad06511c73c6.zip` and its adjacent `.sha256` file from the [v0.1.4 release](https://github.com/BillBalint-SM/bontaflowstack-workbook/releases/tag/v0.1.4). The expected ZIP SHA-256 is `53c7ae4021990a3712e89465584c8f8244747b23e343530f3bbec8ffb3f20559`. The hash detects a damaged download when the expected value comes from a trusted channel; it is not a release signature.
 
-The general `PreToolUse` hook calls the packaged scoped-safety handler. It can
-deny an identified action and require a matching explicit confirmation, but it
-does not override Codex permissions and is not yet evidence of full safety
-enforcement. The question hooks handle `request_user_input`: `PreToolUse`
-performs advisory preference handling and `PostToolUse` records a completed
-question event. A secret-marked question is skipped. For a supported,
-non-secret question the current reused runtime may store the question text,
-options and selected answer in its local question log; do not use it for secret
-or sensitive answers.
+   ```powershell
+   (Get-FileHash -LiteralPath '.\bontaflowstack-0.1.4-deb14b0fadc2424baeb0ad06511c73c6.zip' -Algorithm SHA256).Hash
+   ```
 
-The `Stop` hook sends the trusted lifecycle event to the packaged runtime. A
-matching project and actual Codex task may receive an `unknown` completion; the
-hook never declares `passed`. Hook failures in lifecycle or questions mode are
-fail-open handler results, not evidence that the intended observation or
-enforcement occurred. The PowerShell execution-policy flag applies only to the
-hook child process and does not modify Windows policy or bypass Codex trust.
+2. Extract the ZIP to a stable, writable directory. Keep the extracted root, `.agents/plugins/marketplace.json`, and `plugins/bontaflowstack/` together. The marketplace's `source.path` resolves to `./plugins/bontaflowstack` from that root. GitHub's "Code → Download ZIP" contains source files, not the full installation package.
+3. Open the extracted root as a Codex Desktop project and restart Desktop. In **Plugins Directory**, find that project's marketplace, choose **BontaFlowStack**, and install it.
+4. Start a new Codex task. Confirm that `$bontaflowstack:bfstack` is available. The plugin ID is `bontaflowstack`; the short router and helper name is `bfstack`.
 
-BontaFlowStack stores its local state under `%LOCALAPPDATA%\BontaFlowStack\state`. It ignores inherited `BFSTACK_STATE_ROOT` and `BFSTACK_HOME` overrides from another installation.
+## Review the hooks
 
-To remove BontaFlowStack, use Codex Desktop's native plugin UI. Keep the extracted
-folder until removal is complete. Any separate BontaFlowStack state location is user
-data and is not removed by this package runbook.
+Open **Settings → Hooks** and inspect the four BontaFlowStack hook entries: the general `PreToolUse` safety hook, the `PreToolUse` and `PostToolUse` question hooks, and the `Stop` lifecycle hook. Approve each hook in Codex's native interface if you want to use it. Plugin installation does not approve hooks, and a changed hook definition can require another review. If a required hook is absent or untrusted, the dependent workflow reports `BLOCKED`.
 
-This runbook follows the documented marketplace discovery model, but does not
-establish release acceptance. P3 historically recorded install, discovery,
-explicit Stop-hook trust, a native question UI and removal in a clean Windows
-x64 environment. That evidence applies to the earlier minimal probe only. The
-new candidate's native hook, question capture, lifecycle, full workflow and
-external-scenario acceptance remain `NOT_RUN`.
+The safety hook can deny a recognized action and ask for explicit confirmation. It does not replace Codex permissions. The question hooks observe supported `request_user_input` events. A secret-marked question is skipped; a supported non-secret question may be stored with its text, options, and selected answer in a local log. Avoid sensitive answers in that workflow.
+
+The `Stop` hook passes a trusted lifecycle event to the packaged runtime. It can record an `unknown` completion for a matching project and Codex task; it does not declare a run passed. Hook handler failures can be fail-open, so a returned handler result alone does not prove that an event was observed. The PowerShell execution-policy flag applies to the child process only. It does not change Windows policy or Codex hook trust.
+
+## Local state and removal
+
+BontaFlowStack stores local state under `%LOCALAPPDATA%\BontaFlowStack\state`. The package ignores inherited `BFSTACK_STATE_ROOT` and `BFSTACK_HOME` overrides from another installation.
+
+Uninstall through Codex Desktop's plugin interface before removing the extracted folder. Local state is user data and is not removed automatically.
