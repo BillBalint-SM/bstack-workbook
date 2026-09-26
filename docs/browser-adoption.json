@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "status": "CANDIDATE_BUILT",
+  "purpose": "Reduced Windows BontaFlowStack browser/design source and build closure. Component results below are local synthetic checks, not installed Desktop acceptance.",
+  "constraints": [
+    "Reuse maintained source logic only after its dependency and license closure is copied into bfstack-owned paths.",
+    "Do not copy a previously compiled executable, generated browser server, or existing render bundle.",
+    "Do not run an installer, alter global configuration, or add paid or external services."
+  ],
+  "target": {
+    "platform": "windows-x64",
+    "package": "prebuilt-bontaflowstack",
+    "acceptance": "NOT_RUN",
+    "entry_skill": "bfstack"
+  },
+  "candidate_build": {
+    "status": "CANDIDATE_BUILT",
+    "attempt": "2026-09-25 D1-D6 source-built runtime, retained unchanged through the bfstack naming update. Version 0.1.1 installation and discovery passed; version 0.1.2 updates HOST naming and documentation. The original component evidence below is retained, not represented as a new run.",
+    "component_checks": [
+      {
+        "id": "reviewed-browser-build",
+        "status": "PASS",
+        "evidence": ".tmp/audit/browser-remediation-20260925/build-unicode-final.txt"
+      },
+      {
+        "id": "process-safety",
+        "status": "PASS",
+        "tests_passed": 14,
+        "assertions": 44,
+        "evidence": ".tmp/audit/browser-remediation-20260925/process/process-safety-final.txt"
+      },
+      {
+        "id": "real-inspector-api",
+        "status": "PASS",
+        "tests_passed": 1,
+        "assertions": 50,
+        "evidence": ".tmp/audit/browser-remediation-20260925/review-inspector-green-final.txt"
+      },
+      {
+        "id": "real-sidebar-dom",
+        "status": "PASS",
+        "tests_passed": 3,
+        "assertions": 20,
+        "evidence": ".tmp/audit/browser-remediation-20260925/sidebar/inspector-rejection-red-green.txt"
+      },
+      {
+        "id": "content-frame-and-extension-routing",
+        "status": "PASS",
+        "evidence": ".tmp/audit/browser-remediation-20260925/targeted-final.txt"
+      },
+      {
+        "id": "same-task-visible-open-browse-screenshot-stop",
+        "status": "PASS",
+        "tests_passed": 1,
+        "assertions": 24,
+        "evidence": ".tmp/audit/browser-remediation-20260925/open-flow-final.txt",
+        "limitation": "Functional source workflow, not native skill activation. Final extracted candidate checks were recorded separately."
+      },
+      {
+        "id": "unicode-process-identity",
+        "status": "PASS",
+        "tests_passed": 12,
+        "assertions": 23,
+        "evidence": ".tmp/audit/browser-remediation-20260925/process/process-identity-unicode-green.txt"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "browser",
+      "entrypoints": [
+        "browse/src/cli.ts",
+        "browse/src/find-browse.ts",
+        "browse/src/server.ts"
+      ],
+      "source_files": [
+        "browse/src/activity.ts",
+        "browse/src/audit.ts",
+        "browse/src/browse-client.ts",
+        "browse/src/browser-manager.ts",
+        "browse/src/browser-skill-commands.ts",
+        "browse/src/browser-skill-write.ts",
+        "browse/src/browser-skills.ts",
+        "browse/src/buffers.ts",
+        "browse/src/bun-polyfill.cjs",
+        "browse/src/cdp-allowlist.ts",
+        "browse/src/cdp-bridge.ts",
+        "browse/src/cdp-commands.ts",
+        "browse/src/cdp-inspector.ts",
+        "browse/src/cli.ts",
+        "browse/src/commands.ts",
+        "browse/src/config.ts",
+        "browse/src/content-security.ts",
+        "browse/src/domain-skill-commands.ts",
+        "browse/src/domain-skills.ts",
+        "browse/src/error-handling.ts",
+        "browse/src/file-permissions.ts",
+        "browse/src/find-browse.ts",
+        "browse/src/find-security-sidecar.ts",
+        "browse/src/media-extract.ts",
+        "browse/src/memory-command.ts",
+        "browse/src/memory-snapshot.ts",
+        "browse/src/meta-commands.ts",
+        "browse/src/network-capture.ts",
+        "browse/src/path-security.ts",
+        "browse/src/platform.ts",
+        "browse/src/port-allocator.ts",
+        "browse/src/project-slug.ts",
+        "browse/src/proxy-config.ts",
+        "browse/src/proxy-redact.ts",
+        "browse/src/read-commands.ts",
+        "browse/src/sanitize.ts",
+        "browse/src/screenshot-size-guard.ts",
+        "browse/src/security-classifier.ts",
+        "browse/src/security-sidecar-client.ts",
+        "browse/src/security-sidecar-entry.ts",
+        "browse/src/security.ts",
+        "browse/src/server.ts",
+        "browse/src/session-cookie-store.ts",
+        "browse/src/session-persist.ts",
+        "browse/src/skill-token.ts",
+        "browse/src/snapshot.ts",
+        "browse/src/socks-bridge.ts",
+        "browse/src/sse-helpers.ts",
+        "browse/src/sse-session-cookie.ts",
+        "browse/src/stealth.ts",
+        "browse/src/tab-session.ts",
+        "browse/src/terminal-agent-control.ts",
+        "browse/src/token-registry.ts",
+        "browse/src/url-validation.ts",
+        "browse/src/welcome.html",
+        "browse/src/write-commands.ts",
+        "browse/src/xprotect-heal.ts",
+        "browse/src/xvfb.ts",
+        "browse/bin/find-browse",
+        "browse/bin/remote-slug",
+        "browse/scripts/build-node-server.sh"
+      ],
+      "build": {
+        "compile": [
+          "bun build --compile browse/src/cli.ts --outfile <bfstack>/runtime/browse/dist/browse.exe",
+          "bun build --compile browse/src/find-browse.ts --outfile <bfstack>/runtime/browse/dist/find-browse.exe"
+        ],
+        "windows_server": "Adapt browse/scripts/build-node-server.sh into a bfstack-owned Windows build step; its generated server-node.mjs and bun-polyfill.cjs must be regenerated.",
+        "outputs": [
+          "browse.exe",
+          "find-browse.exe",
+          "server-node.mjs",
+          "bun-polyfill.cjs"
+        ],
+        "status": "CANDIDATE_BUILT"
+      },
+      "dependencies": {
+        "root_manifest": {
+          "playwright": "^1.62.1",
+          "diff": "^9.0.0",
+          "cross-spawn": "^7.0.6",
+          "socks": "^2.8.9"
+        },
+        "node_runtime_for_server": true,
+        "notes": [
+          "The Windows server build externalizes playwright, playwright-core, diff, sharp and @huggingface/transformers. No tunnel or cookie-profile import dependency remains.",
+          "Packaged Chromium and Node use only package-relative paths. Local token, session, browser-skill and extension authentication are retained."
+        ]
+      },
+      "removed_source_files": [
+        "browse/src/claude-bin.ts",
+        "browse/src/pty-session-cookie.ts",
+        "browse/src/pty-session-lease.ts",
+        "browse/src/terminal-agent.ts"
+      ]
+    },
+    {
+      "name": "browser-extension",
+      "entrypoints": [
+        "extension/manifest.json",
+        "extension/background.js",
+        "extension/sidepanel.html"
+      ],
+      "source_files": [
+        "extension/background.js",
+        "extension/content.css",
+        "extension/content.js",
+        "extension/inspector.css",
+        "extension/inspector.js",
+        "extension/manifest.json",
+        "extension/popup.html",
+        "extension/popup.js",
+        "extension/sender-auth.js",
+        "extension/sidepanel.css",
+        "extension/sidepanel.html",
+        "extension/sidepanel.js"
+      ],
+      "omitted_source_assets": [
+        "extension/icons/icon-16.png",
+        "extension/icons/icon-48.png",
+        "extension/icons/icon-128.png"
+      ],
+      "build": {
+        "path": "runtime/extension",
+        "status": "CANDIDATE_BUILT"
+      },
+      "dependencies": {
+        "exact": {},
+        "license_files": []
+      },
+      "notes": [
+        "The source icon assets are deliberately not adopted because their legacy visual branding is not part of the bfstack release; manifest icon declarations are omitted so Chromium uses its default extension icon.",
+        "Browser-manager discovers only BFSTACK_ROOT/extension. Developer-checkout and profile-installed extension fallbacks are removed.",
+        "The packaged-Node headed connect component check launched Chromium with this extension, reported healthy headed mode, and stopped cleanly. This is not Codex Desktop E2E evidence.",
+        "Detached terminal pane and its exclusive xterm dependencies removed; local browser controls and authentication retained."
+      ],
+      "removed_source_files": [
+        "extension/sidepanel-terminal.js",
+        "extension/lib/xterm.css",
+        "extension/lib/xterm.js",
+        "extension/lib/xterm-addon-fit.js",
+        "extension/lib/xterm.LICENSE",
+        "extension/lib/xterm-addon-fit.LICENSE"
+      ]
+    },
+    {
+      "name": "design",
+      "entrypoints": [
+        "design/src/cli.ts"
+      ],
+      "source_files": [
+        "design/src/auth.ts",
+        "design/src/brief.ts",
+        "design/src/check.ts",
+        "design/src/cli.ts",
+        "design/src/commands.ts",
+        "design/src/compare.ts",
+        "design/src/daemon-client.ts",
+        "design/src/daemon-state.ts",
+        "design/src/daemon.ts",
+        "design/src/design-to-code.ts",
+        "design/src/diff.ts",
+        "design/src/evolve.ts",
+        "design/src/flag-utils.ts",
+        "design/src/gallery.ts",
+        "design/src/generate.ts",
+        "design/src/iterate.ts",
+        "design/src/memory.ts",
+        "design/src/receipted-fetch.ts",
+        "design/src/serve.ts",
+        "design/src/session.ts",
+        "design/src/variants.ts"
+      ],
+      "build": {
+        "compile": [
+          "bun build --compile design/src/cli.ts --outfile <bfstack>/runtime/design/dist/design.exe"
+        ],
+        "outputs": [
+          "design.exe"
+        ],
+        "status": "CANDIDATE_BUILT"
+      },
+      "dependencies": {
+        "root_manifest": {
+          "@huggingface/transformers": "^4.2.0",
+          "playwright": "^1.62.1"
+        },
+        "notes": [
+          "A local comparison-board artifact was generated from a synthetic local image. Generation/provider authentication and any non-zero-cost branch remain blocked until separately decided."
+        ]
+      },
+      "removed_source_files": []
+    }
+  ],
+  "shared_build_requirements": {
+    "runtime_resources": [
+      {
+        "destination": "design-html/sections/detector-install-offer.md",
+        "source": "design-html/sections/detector-install-offer.md",
+        "adaptation": "Rewritten for the bfstack host contract: optional detector readiness is relevant only after explicit user invocation and never installs a tool."
+      },
+      {
+        "destination": "design-html/vendor/pretext.js",
+        "source": "@chenglou/pretext 0.0.8, dist/layout.js",
+        "source_url": "https://github.com/chenglou/pretext",
+        "package_integrity": "sha512-yqm2GMxnPI7VHcHwe84P8ZF0JK/2d2DMKPqMN+s95jQhwDMYYXKVFVJUMEaVWckQStdsjdLav/0Vu+d9YbtGxA==",
+        "source_sha256": "e4ba4c592ba903fac1996d0614c61ba9fb9fa36d938270eab5818d9f449953e8",
+        "license": "MIT; retained in design-html/vendor/PRETEXT.LICENSE",
+        "build_recipe": "bun build runtime/pretext-browser-entry.js --target=browser --format=iife --outfile plugins/bontaflowstack/runtime/design-html/vendor/pretext.js",
+        "adapter": "runtime/pretext-browser-entry.js",
+        "adapter_sha256": "824ce5be1d65c2b16399779770eb849e47da677c14407c7af779823a937629c3",
+        "adaptation": "The official package's source-reachable ESM graph is bundled into a self-contained classic-script IIFE. This preserves the design-html consumer contract: it inlines the file and accesses window.Pretext with no network dependency.",
+        "distribution_status": "VERIFIED"
+      },
+      {
+        "destination": "lib/dom-dump.js",
+        "source": "lib/dom-dump.js",
+        "adaptation": "Operational product identifiers changed to bfstack."
+      }
+    ],
+    "runtime": {
+      "bun": "1.4.2 (existing packaged runtime preparation target)",
+      "node": "required for browser Windows server bundle; exact supported version NOT_RUN"
+    },
+    "root_build_reference": [
+      "bun build --compile browse/src/cli.ts",
+      "bun build --compile browse/src/find-browse.ts",
+      "bun build --compile design/src/cli.ts"
+    ],
+    "verified_resource_hashes": {
+      "design-html/vendor/pretext.js": "b26b3f19e921eb9135e6164e54f710b14f5e0b2730de6a7061ad98e209bad3b5",
+      "design-html/vendor/PRETEXT.LICENSE": "e9355cb16457e81acd97dac2e50f2f8bbf2a9a464025f9c46db3680cf9598846",
+      "runtime/package.json": "dec4e25edc0a95384befa416ebda67c3d4db8e0ff0bb2f8f0e4f33314dc32ef6",
+      "runtime/bun.lock": "f06c73bc90bc03366d35ea86a3d787da21c8e92a9aa15938fd66021df2fbbb78"
+    },
+    "candidate_output_hashes": {
+      "browse/dist/browse.exe": "e12b72ccf8cfb73c4261982659cf0335267dd7f087b351ab6405ee3784ed0c6a",
+      "browse/dist/find-browse.exe": "51b1821733672bf7cf76e1b9b334f91a21c5dc7f941328c8550ef17895f94e20",
+      "browse/dist/server-node.mjs": "8e286e00840085430c7799daf45e79c119fe2720739758723583496772092b5a",
+      "design/dist/design.exe": "1e48dd91701e4e7acc3688a1554c7336d6531653e48ac05d0b20ef1e6bdc7c2a"
+    },
+    "package_rules": [
+      "Copy source and declared dependency metadata into bfstack-owned paths.",
+      "Build in a clean, isolated staging directory.",
+      "Include only freshly generated bfstack outputs and required notices.",
+      "Verify package manifest, hashes, branding scan, and installed Desktop discovery before E2E."
+    ],
+    "status": "CANDIDATE_BUILT"
+  },
+  "open_items": [
+    "Full native browser/Inspector closure, real hook trust and full 40-skill workflow acceptance remain separate from the successful 0.1.1 installation, discovery and bfstack instruction read.",
+    "User-authorized external/provider scenarios remain separate from synthetic local component checks."
+  ],
+  "historical_pre_browser_remediation_candidate": {
+    "status": "CANDIDATE_BUILT",
+    "attempt": "Fresh reduced source built locally with packaged Bun. Local Node/Chromium integration uses isolated synthetic loopback fixtures.",
+    "component_checks": [
+      {
+        "id": "codex-remediation-renderer-build",
+        "command": "scripts/build-adopted-renderers.ps1",
+        "status": "PASS",
+        "evidence": ".tmp/audit/remediation-01-13-20260924/final-build.txt"
+      },
+      {
+        "id": "current-source-local-browser-auth-session-rendering",
+        "command": "bun test test/reduced-browser-runtime.test.ts",
+        "status": "PASS",
+        "tests_passed": 1,
+        "tests_skipped": 1,
+        "assertions": 40,
+        "evidence": ".tmp/audit/remediation-01-13-20260924/final-browser.txt",
+        "limitation": "Optional headed handoff skipped; actual extension UI and native Codex acceptance NOT_RUN."
+      },
+      {
+        "id": "current-extracted-local-browser-auth-session-rendering",
+        "command": "BFSTACK_REDUCED_PLUGIN_ROOT=<extracted plugin> bun test test/reduced-browser-runtime.test.ts",
+        "status": "PASS",
+        "tests_passed": 1,
+        "tests_skipped": 1,
+        "assertions": 40,
+        "evidence": ".tmp/audit/remediation-01-13-20260924/packaged-browser.txt",
+        "limitation": "Same maintained executable and sources; no native acceptance claim."
+      }
+    ],
+    "historical_component_checks": {
+      "note": "Recorded before the current Codex remediation; not acceptance of the current candidate.",
+      "checks": [
+        {
+          "id": "reduced-renderer-build",
+          "command": "scripts/build-adopted-renderers.ps1",
+          "status": "PASS"
+        },
+        {
+          "id": "local-browser-auth-session-html-and-handoff",
+          "command": "BFSTACK_RUN_HEADED_BROWSER_E2E=1 bun test test/reduced-browser-runtime.test.ts",
+          "status": "PASS",
+          "tests": 2,
+          "assertions": 34
+        }
+      ]
+    }
+  }
+}

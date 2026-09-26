@@ -1,0 +1,20 @@
+{
+    "name":  "bontaflowstack",
+    "version":  "0.1.4",
+    "description":  "Windows x64 engineering workflows for Codex.",
+    "author":  {
+                   "name":  "BontaFlowStack contributors"
+               },
+    "skills":  "./skills/",
+    "interface":  {
+                      "displayName":  "BontaFlowStack",
+                      "shortDescription":  "Engineering workflows for Codex on Windows.",
+                      "longDescription":  "BontaFlowStack provides planning, implementation, review and release workflows for Codex on Windows x64.",
+                      "developerName":  "BontaFlowStack contributors",
+                      "category":  "Productivity",
+                      "capabilities":  [
+
+                                       ],
+                      "defaultPrompt":  "Help me use BontaFlowStack."
+                  }
+}

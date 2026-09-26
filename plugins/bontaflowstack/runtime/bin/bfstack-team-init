@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo 'OUT: bfstack-team-init is not supported inside the Windows Codex package.' >&2
+exit 2

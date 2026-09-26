@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# bfstack-timeline-log — append a timeline event to the project timeline
+# Usage: bfstack-timeline-log '{"skill":"review","event":"started","branch":"main"}'
+#
+# Session timeline is local-only.
+# Required fields: skill, event (started|completed).
+# Optional: branch, outcome, duration_s, session, ts.
+# Validation failure → skip silently (non-blocking).
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+eval "$("$SCRIPT_DIR/bfstack-slug" 2>/dev/null)"
+BFSTACK_HOME="${BFSTACK_STATE_ROOT:-${BFSTACK_HOME:-$HOME/.bfstack}}"
+bun -e 'require("fs").mkdirSync(process.argv[1], {recursive:true})' "$BFSTACK_HOME/projects/$SLUG"
+
+INPUT="$1"
+
+# Validate: input must be parseable JSON with required fields
+if ! printf '%s' "$INPUT" | bun -e "
+  const j = JSON.parse(await Bun.stdin.text());
+  if (!j.skill || !j.event) process.exit(1);
+" 2>/dev/null; then
+  exit 0  # skip silently, non-blocking
+fi
+
+# Enrich legacy callers rather than changing their CLI contract. Native Codex
+# session identity wins over the old synthetic session value so Stop hooks can
+# correlate only records from the real task that stopped.
+INPUT=$(printf '%s' "$INPUT" | BFSTACK_SLUG="$SLUG" BFSTACK_NATIVE_SESSION="${CODEX_THREAD_ID:-}" bun -e "
+  const j = JSON.parse(await Bun.stdin.text());
+  const native = process.env.BFSTACK_NATIVE_SESSION;
+  const valid = /^[A-Za-z0-9_-]{1,128}$/;
+  if (typeof native !== 'string' || !valid.test(native)) process.exit(1);
+  j.sessionId = native;
+  j.projectSlug = process.env.BFSTACK_SLUG;
+  j.timestamp = j.timestamp || j.ts || new Date().toISOString();
+  j.ts = j.ts || j.timestamp;
+  console.log(JSON.stringify(j));
+" 2>/dev/null) || exit 0
+
+echo "$INPUT" >> "$BFSTACK_HOME/projects/$SLUG/timeline.jsonl"

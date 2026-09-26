@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+DIR="$(cd "$(dirname "$0")/.." && pwd)/dist"
+if test -x "$DIR/find-browse.exe"; then exec "$DIR/find-browse.exe" "$@"; fi
+if test -x "$DIR/browse.exe"; then printf '%s\n' "$DIR/browse.exe"; exit 0; fi
+echo 'BLOCKED: packaged Windows browser is missing' >&2
+exit 1

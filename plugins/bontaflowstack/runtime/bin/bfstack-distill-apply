@@ -1,0 +1,212 @@
+#!/usr/bin/env bash
+# bfstack-distill-apply — apply a single distillation proposal after user Y.
+#
+# Plan-tune cathedral T11. Reads distillation-proposals.json, applies the
+# Nth proposal to the right surface:
+#
+#   preference     → bfstack-question-preference --write
+#   declared-nudge → atomic update to ~/.bfstack/developer-profile.json declared
+#   memory-nugget  → append to ~/.bfstack/free-text-memory.json (local fallback)
+#
+# Always confirm before calling this from the skill — the bin assumes the user
+# already approved (Codex #15 trust boundary). The skill template (/plan-tune
+# distill review section) handles the confirm UX.
+#
+# Usage:
+#   bfstack-distill-apply --proposal <N>                # apply Nth proposal
+#   bfstack-distill-apply --list                        # show pending proposals
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+BFSTACK_HOME="${BFSTACK_STATE_ROOT:-${BFSTACK_HOME:-$HOME/.bfstack}}"
+eval "$("$SCRIPT_DIR/bfstack-slug" 2>/dev/null || true)"
+SLUG="${SLUG:-unknown}"
+PROJECT_DIR="$BFSTACK_HOME/projects/$SLUG"
+PROPOSAL_FILE="$PROJECT_DIR/distillation-proposals.json"
+MEMORY_FILE="$BFSTACK_HOME/free-text-memory.json"
+PROFILE_FILE="$BFSTACK_HOME/developer-profile.json"
+
+ACTION="apply"
+PROPOSAL_IDX=""
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --proposal) PROPOSAL_IDX="$2"; shift 2 ;;
+    --list) ACTION="list"; shift ;;
+    --help|-h)
+      sed -n '1,/^set -euo/p' "$0" | sed 's|^# \?||'
+      exit 0
+      ;;
+    *) echo "unknown arg: $1" >&2; exit 1 ;;
+  esac
+done
+
+if [ ! -f "$PROPOSAL_FILE" ]; then
+  echo "NO_PROPOSALS: $PROPOSAL_FILE missing — create a local proposal file before applying"
+  exit 0
+fi
+
+if [ "$ACTION" = "list" ]; then
+  PROPOSAL_FILE_PATH="$PROPOSAL_FILE" bun -e '
+    const fs = require("fs");
+    const p = JSON.parse(fs.readFileSync(process.env.PROPOSAL_FILE_PATH, "utf-8"));
+    const proposals = p.proposals || [];
+    if (proposals.length === 0) { console.log("(no proposals)"); process.exit(0); }
+    console.log("GENERATED: " + p.generated_at);
+    console.log("SOURCE_EVENTS: " + (p.source_event_count || 0));
+    proposals.forEach((pr, i) => {
+      console.log("");
+      console.log("[" + i + "] " + (pr.kind || "?") + " (confidence: " + (pr.confidence || "?") + ")");
+      if (pr.rationale) console.log("    rationale: " + pr.rationale);
+      if (pr.kind === "preference") {
+        console.log("    question_id: " + pr.question_id);
+        console.log("    choice: " + pr.choice + " (scope: " + pr.scope + ")");
+      } else if (pr.kind === "declared-nudge") {
+        console.log("    dimension: " + pr.dimension);
+        console.log("    direction: " + pr.direction + " (" + (pr.magnitude || "?") + ")");
+      } else if (pr.kind === "memory-nugget") {
+        console.log("    nugget: " + pr.nugget);
+        console.log("    signal_keys: " + JSON.stringify(pr.applies_to_signal_keys || []));
+      }
+      if (pr.source_quotes && pr.source_quotes.length) {
+        console.log("    quotes:");
+        pr.source_quotes.forEach((q) => console.log("      - \"" + q + "\""));
+      }
+    });
+  '
+  exit 0
+fi
+
+if [ -z "$PROPOSAL_IDX" ]; then
+  echo "--proposal <N> required" >&2
+  exit 1
+fi
+
+# Apply via bun. The existing proposal file already anchors the project state;
+# do not create a directory before proposal validation.
+PROPOSAL_IDX="$PROPOSAL_IDX" \
+PROPOSAL_FILE_PATH="$PROPOSAL_FILE" \
+MEMORY_FILE_PATH="$MEMORY_FILE" \
+PROFILE_FILE_PATH="$PROFILE_FILE" \
+PREF_BIN="$SCRIPT_DIR/bfstack-question-preference" \
+PROCESS_EXEC_PATH="$SCRIPT_DIR/../lib/process-exec.ts" \
+bun -e '
+  const fs = require("fs");
+  const { spawnSync } = require("child_process");
+  const { bashScriptInvocation } = require(process.env.PROCESS_EXEC_PATH);
+  const idx = parseInt(process.env.PROPOSAL_IDX, 10);
+  const p = JSON.parse(fs.readFileSync(process.env.PROPOSAL_FILE_PATH, "utf-8"));
+  const proposals = p.proposals || [];
+  if (!Number.isInteger(idx) || idx < 0 || idx >= proposals.length) {
+    process.stderr.write("invalid --proposal index " + idx + " (have " + proposals.length + ")\n");
+    process.exit(1);
+  }
+  const pr = proposals[idx];
+  if (!pr || typeof pr !== "object" || pr.applied_at) {
+    process.stderr.write("proposal " + idx + " is already applied or invalid\n");
+    process.exit(1);
+  }
+  if (!["preference", "declared-nudge", "memory-nugget"].includes(pr.kind)) {
+    process.stderr.write("proposal " + idx + " has unknown kind: " + String(pr.kind) + "\n");
+    process.exit(1);
+  }
+  if (pr.kind === "preference" && (!/^[a-z0-9-]{1,64}$/.test(pr.question_id || "") ||
+      !["user", "project", "task"].includes(pr.scope) || typeof pr.choice !== "string" ||
+      typeof pr.question !== "string" || !Array.isArray(pr.options))) {
+    process.stderr.write("proposal " + idx + " has a legacy or invalid scoped preference payload; it was not applied\n");
+    process.exit(1);
+  }
+  if (pr.kind === "declared-nudge" && (!/^[a-z][a-z0-9_-]{0,63}$/.test(pr.dimension || "") || !["up", "down"].includes(pr.direction) || !["small", "medium", "large"].includes(pr.magnitude))) {
+    process.stderr.write("proposal " + idx + " has an invalid declared-nudge payload\n");
+    process.exit(1);
+  }
+  if (pr.kind === "memory-nugget" && (typeof pr.nugget !== "string" || !pr.nugget.trim() || !Array.isArray(pr.applies_to_signal_keys) || !pr.applies_to_signal_keys.every((key) => typeof key === "string"))) {
+    process.stderr.write("proposal " + idx + " has an invalid memory-nugget payload\n");
+    process.exit(1);
+  }
+
+  const stamp = new Date().toISOString();
+
+  // Memory-nugget: always write to the local file.
+  if (pr.kind === "memory-nugget") {
+    const memPath = process.env.MEMORY_FILE_PATH;
+    let mem = { nuggets: [] };
+    try {
+      mem = JSON.parse(fs.readFileSync(memPath, "utf-8"));
+    } catch (err) {
+      if (err && err.code !== "ENOENT") {
+        process.stderr.write("cannot read existing local memory: " + err.message + "\n");
+        process.exit(1);
+      }
+    }
+    if (!Array.isArray(mem.nuggets)) mem.nuggets = [];
+    mem.nuggets.push({
+      nugget: pr.nugget,
+      applies_to_signal_keys: pr.applies_to_signal_keys || [],
+      applied_at: stamp,
+      source_quotes: pr.source_quotes || [],
+    });
+    const tmp = memPath + ".tmp";
+    fs.writeFileSync(tmp, JSON.stringify(mem, null, 2));
+    fs.renameSync(tmp, memPath);
+    console.log("APPLIED: memory-nugget appended to " + memPath);
+  }
+
+  // Preference: only a complete v2 proposal reaches the shared CLI validator.
+  // Legacy mode proposals cannot create a v2 record or mark themselves applied.
+  if (pr.kind === "preference") {
+    const preferenceArgs = [
+      "--write",
+      JSON.stringify({
+        question_id: pr.question_id,
+        choice: pr.choice,
+        scope: pr.scope,
+        question: pr.question,
+        options: pr.options,
+        source: "plan-tune",
+      }),
+    ];
+    const invocation = bashScriptInvocation(process.env.PREF_BIN, preferenceArgs);
+    if (!invocation) {
+      process.stderr.write("preference apply failed: bash is required to run the local helper\n");
+      process.exit(1);
+    }
+    const res = spawnSync(invocation.cmd, invocation.argv, { encoding: "utf-8", stdio: ["ignore", "pipe", "pipe"], timeout: 5000, shell: invocation.shell });
+    if (res.status !== 0) {
+      process.stderr.write("preference apply failed: " + (res.stderr || res.stdout) + "\n");
+      process.exit(1);
+    }
+    console.log("APPLIED: preference " + pr.question_id + " → " + pr.choice + " (scope: " + pr.scope + ")");
+  }
+
+  // Declared-nudge: atomic update to developer-profile.json declared. Magnitude
+  // tiers: small=0.05, medium=0.10, large=0.15. Clamp to [0, 1].
+  if (pr.kind === "declared-nudge") {
+    const mag = { small: 0.05, medium: 0.10, large: 0.15 }[pr.magnitude || "small"] || 0.05;
+    const delta = pr.direction === "down" ? -mag : mag;
+    const profilePath = process.env.PROFILE_FILE_PATH;
+    let profile = {};
+    try {
+      profile = JSON.parse(fs.readFileSync(profilePath, "utf-8"));
+    } catch (err) {
+      if (err && err.code !== "ENOENT") {
+        process.stderr.write("cannot read existing developer profile: " + err.message + "\n");
+        process.exit(1);
+      }
+    }
+    profile.declared = profile.declared || {};
+    const cur = typeof profile.declared[pr.dimension] === "number" ? profile.declared[pr.dimension] : 0.5;
+    const next = Math.max(0, Math.min(1, cur + delta));
+    profile.declared[pr.dimension] = +next.toFixed(3);
+    profile.declared_at = stamp;
+    const tmp = profilePath + ".tmp";
+    fs.writeFileSync(tmp, JSON.stringify(profile, null, 2));
+    fs.renameSync(tmp, profilePath);
+    console.log("APPLIED: declared." + pr.dimension + " " + cur + " → " + profile.declared[pr.dimension]);
+  }
+
+  // Mark the proposal as applied so /plan-tune list shows it consumed.
+  pr.applied_at = stamp;
+  const tmp = process.env.PROPOSAL_FILE_PATH + ".tmp";
+  fs.writeFileSync(tmp, JSON.stringify(p, null, 2));
+  fs.renameSync(tmp, process.env.PROPOSAL_FILE_PATH);
+'

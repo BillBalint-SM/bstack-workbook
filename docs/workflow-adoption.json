@@ -1,0 +1,359 @@
+{
+  "status": "locally-maintained-reduced-scope-not-native-accepted",
+  "trackedSourceRevision": "5fcee0c4e7913ce5ace55ad450aab4ae20482f4b",
+  "renderedSourceLocation": "Historical pinned workflow renders; current maintained skills are edited directly. The old importer is retired.",
+  "selection": "40 maintained Windows/Codex skills; nine removed product capabilities are excluded.",
+  "transformations": [
+    "GSTACK_* to BFSTACK_*",
+    ".gstack to .bfstack",
+    "gstack product/path identifiers to bfstack",
+    "open-gstack-browser to open-bfstack-browser",
+    "replaced inherited profile/setup preamble with packaged runtime checkpoint",
+    "translated inherited question auto-choice notation to the Codex real-answer boundary",
+    "Removed nine exclusive workflows and routes; retained local memory under bontaflow-memory and shared dependencies.",
+    "Codex remediation: proportional workflows, same-task verified handoffs, local browser/rendering, explicit authorization and missing-prerequisite boundaries..",
+    "2026-09-26: the entry skill and internal helper names use bfstack; the plugin identity is bontaflowstack."
+  ],
+  "excluded": [
+    "claude",
+    "ios-clean",
+    "ios-design-review",
+    "ios-fix",
+    "ios-qa",
+    "ios-sync",
+    "benchmark-models",
+    "pair-agent",
+    "sync-gbrain",
+    "setup-gbrain",
+    "upgrade",
+    "make-pdf",
+    "diagram",
+    "setup-browser-cookies",
+    "canary"
+  ],
+  "workflows": [
+    {
+      "skill": "bfstack",
+      "renderedSource": "gstack",
+      "renderedSha256": "9e997ef8a1fe966a7521e9c70905f8047943d49e359be9cebc42c697b1faa96d",
+      "stagedSha256": "09a49c8025f7f17cf5905e53e4cf73eeafdb2472f0221c1c6ab35ca870fd34aa"
+    },
+    {
+      "skill": "office-hours",
+      "renderedSource": "gstack-office-hours",
+      "renderedSha256": "63ef14b77061b1d6a25e549a114b60c2a55e737349a4cd1bd30aeb01553d51e0",
+      "stagedSha256": "fbb3cdc0aebdb04ef7f85b2604d13b617beb95348a8f0c54ac6aeb2bb425e16c"
+    },
+    {
+      "skill": "spec",
+      "renderedSource": "gstack-spec",
+      "renderedSha256": "d228f356ebbbf592b20aa650d649cde1d4515d31b9af5f01bcce7ac57e9345eb",
+      "stagedSha256": "20282d8d0e702627baed3eb7f1892ec5938c52d893a8b2d627322497d9c75d29"
+    },
+    {
+      "skill": "autoplan",
+      "renderedSource": "gstack-autoplan",
+      "renderedSha256": "9a5c0957727d7363fa8b9e75d70dce5e928054b9caa03b7ceb45db8b36143ba1",
+      "stagedSha256": "cad29d73d41ff7f1a1c1cd277bfcd4cba25d9348d2bca1b3d8ddb89547ac2663"
+    },
+    {
+      "skill": "plan-ceo-review",
+      "renderedSource": "gstack-plan-ceo-review",
+      "renderedSha256": "863b8cc57b43766df5e150a1c55fc18a198dba1c8f7a8e57de669122b46a9fb2",
+      "stagedSha256": "573c1488d60b162a11e3994bf0c44ce9931e195dfb429afa938fd75f5b60b679"
+    },
+    {
+      "skill": "plan-design-review",
+      "renderedSource": "gstack-plan-design-review",
+      "renderedSha256": "574760c2776065e3725963077b1ed44efa7f6b5b7d35118a012441ed298a5170",
+      "stagedSha256": "a3ba5d87e8979ecd729714f228ee494d48e035df310bcd28fe470ed0df5f0c34"
+    },
+    {
+      "skill": "plan-devex-review",
+      "renderedSource": "gstack-plan-devex-review",
+      "renderedSha256": "7f758b7a2be4722f33d5e37533a9f2a87d069dfd0a3216a28245e477159686fe",
+      "stagedSha256": "cecedc491b86afa054523ae46e31e433faf4f4d23de0565330fa96f1de4ca6cd"
+    },
+    {
+      "skill": "plan-eng-review",
+      "renderedSource": "gstack-plan-eng-review",
+      "renderedSha256": "a3809ec5c36575dc3f96d2d6c86c64c5da6327323dda1dfedc2c2f05b87e2c0d",
+      "stagedSha256": "36483c72c40a0ac028cb089bd639fed2f1cdeb749b489bb1c91a8d6715b9ec5b"
+    },
+    {
+      "skill": "plan-tune",
+      "renderedSource": "gstack-plan-tune",
+      "renderedSha256": "3ec3c74f262f01d4722c7bcd32f85e5c6d3c65165d278e19874817bd460d6dbc",
+      "stagedSha256": "ab8eb021fece394527d1a3d2de286851853b775d1e247d367fa05bff8593257a"
+    },
+    {
+      "skill": "design-consultation",
+      "renderedSource": "gstack-design-consultation",
+      "renderedSha256": "029f58f85ea1506d452fae59644556e84a14f7c9032023640e9d8e07e2f8d9f9",
+      "stagedSha256": "39cd624dffd3d44a5910d3d6af23629ef6f3018fd431916dd8b02932a8b2e119"
+    },
+    {
+      "skill": "review",
+      "renderedSource": "gstack-review",
+      "renderedSha256": "5fd00ce905175196875a19e30fddc36a2e5c64a3e104e115db626493ede613bb",
+      "stagedSha256": "b0f34e7914f7b2173189df8f82edd8fba18ba12abf3319af6dcf69d3c8e0d494"
+    },
+    {
+      "skill": "investigate",
+      "renderedSource": "gstack-investigate",
+      "renderedSha256": "ba56c4fe2ebe7131019cff288f8ca906993a01a9b1158457685d6e716f4776ee",
+      "stagedSha256": "ac1e1f4d8498dce416b0662f098d4f0adad852ec1918c3bd48c669332049046f"
+    },
+    {
+      "skill": "qa",
+      "renderedSource": "gstack-qa",
+      "renderedSha256": "e342329235b935dd6ec476e87c69c294950f66dc8968c05a6820996ce0b107a7",
+      "stagedSha256": "ff30311ffdf91a736012a542a28592ccba4e270a1f883d490814d2e1dba66f85"
+    },
+    {
+      "skill": "qa-only",
+      "renderedSource": "gstack-qa-only",
+      "renderedSha256": "9b8482b0df2daa7200781651f7ebace5f19bb1214dbf132b0f544d7c2e88abda",
+      "stagedSha256": "818c34cc6c9f04ae06324855735c7b6378f6eb1abc476a2fbc30bb2c6c86cb1b"
+    },
+    {
+      "skill": "design-review",
+      "renderedSource": "gstack-design-review",
+      "renderedSha256": "81e95480d6262299cb9046f9972a71402e9da8cc72bc61324340892bce61c648",
+      "stagedSha256": "e768a8b974d7b90593fb1f9ccffac9bc0f4a1b6aad5d9f639b52a2582e3e207e"
+    },
+    {
+      "skill": "design-shotgun",
+      "renderedSource": "gstack-design-shotgun",
+      "renderedSha256": "70b76f08469231239f1fb2e5bd1a360b3240bbae91770e4c923f9753cad74465",
+      "stagedSha256": "4d9e2dea2e3d5d696511a06c62b8cc566428bf5c8f0a8fd84f857dece10b994f"
+    },
+    {
+      "skill": "design-html",
+      "renderedSource": "gstack-design-html",
+      "renderedSha256": "b803958ffd258c26f5a1dcf88d24afab417253f3584cbae6c723b5e9a3ce39aa",
+      "stagedSha256": "1acbb9a27a843e4d45b4242ec067cc2c3c359d331c702b1a952edd1beb780c08"
+    },
+    {
+      "skill": "devex-review",
+      "renderedSource": "gstack-devex-review",
+      "renderedSha256": "4390eacf33531d7bbf6b0e69dc1f42efdd01d2adc862b1bbb6b088c8a7670377",
+      "stagedSha256": "7fa97269d8bac839a0714a8993d354d57d9d7322fab9e8d4c00397a8d0e118b8"
+    },
+    {
+      "skill": "health",
+      "renderedSource": "gstack-health",
+      "renderedSha256": "df4339fa4bd34eaf6e7f36aaed31cb17509f603afc0e4870afbf48bb9c52a90a",
+      "stagedSha256": "87635e2538de86e6cb8e5dbc47b3dabf25406d060b33d3ad78b7a8c251e6fa5f"
+    },
+    {
+      "skill": "benchmark",
+      "renderedSource": "gstack-benchmark",
+      "renderedSha256": "c6f7936f462844110e68918556a5aaa2180482d47c544425b317cef9e3fba18c",
+      "stagedSha256": "7652f079ea9e4ce35e832bdc21bb436c257107450305c3962d756f1f2101a928"
+    },
+    {
+      "skill": "cso",
+      "renderedSource": "gstack-cso",
+      "renderedSha256": "81f35b51f418290143f7090bb396bb51c258542fb40c44a0416e7821c11b22d0",
+      "stagedSha256": "a6878b45ae26c0f697a2cfd706f5cae6e4eca5ab5fbc43b38df4d969e15497de"
+    },
+    {
+      "skill": "document-generate",
+      "renderedSource": "gstack-document-generate",
+      "renderedSha256": "c8f64124d5fc0512203577f2dce8dd5fcd67a026511dbfb4d7d53900794a3e66",
+      "stagedSha256": "b8091dde6e44be33861a58d5c5c96dfed6888bc2aab6ae6aed5725facd6fd751"
+    },
+    {
+      "skill": "skillify",
+      "renderedSource": "gstack-skillify",
+      "renderedSha256": "50fe1e1d3f7046ef62080d3a00f5b8d40b57b2832ed9b58dec03c2fbe5b0c0ea",
+      "stagedSha256": "38dfd54d38ff1304ca1054cb60d5a2669f115e36d2d8d117582b10df77bde8d4"
+    },
+    {
+      "skill": "browse",
+      "renderedSource": "gstack-browse",
+      "renderedSha256": "e42f7eb12c87cb3a564fd8d6b3914a1b3a41206acc7fcf32b69639240708f701",
+      "stagedSha256": "a82925a08a844ca879e4b85a867fb965f6716d8cadaf94012f0b7916d74f8aa4"
+    },
+    {
+      "skill": "open-bfstack-browser",
+      "renderedSource": "gstack-open-gstack-browser",
+      "renderedSha256": "b8a7ac7f08e68290f4e2a68f809d49fcbb66232e7f781c05d18709692c17a787",
+      "stagedSha256": "0dbb59656c1c2e0bdcf536e4a6082f2abc8599a20e7c064684debae3cce459b4"
+    },
+    {
+      "skill": "scrape",
+      "renderedSource": "gstack-scrape",
+      "renderedSha256": "efc0e4b4947f9d029d8d2269042edd37bce4af94f3b0cce6b3b7812e02018015",
+      "stagedSha256": "52c8ffcf78c3e13f01ee0b1754f803ba88e129e99e61920a886758d5e7bfe6f8"
+    },
+    {
+      "skill": "ship",
+      "renderedSource": "gstack-ship",
+      "renderedSha256": "63973ac229278965d6bc6998c81298d793fba784d9b1e5b14e4d8ef0c43a6238",
+      "stagedSha256": "b60ef7c8f825d36cb2e6f53a047812f3c24438b03e18d581864297f2b742d493"
+    },
+    {
+      "skill": "land-and-deploy",
+      "renderedSource": "gstack-land-and-deploy",
+      "renderedSha256": "2ac36ed8df7bebd570870c3878ef0334c7e222962d7814e056c0ec782cf73fcc",
+      "stagedSha256": "c28017fe748c9c9a9315c12840374d085000002dd561f6b0e467c41ba4dda911"
+    },
+    {
+      "skill": "landing-report",
+      "renderedSource": "gstack-landing-report",
+      "renderedSha256": "5e6098ecf57ebe7628fb5e7dfe372272dd4487fd75b18a87f9bdf065fe051522",
+      "stagedSha256": "e956d92a4cffffd511e46ab0b02ed8943ae79da88aedbe47b6002bcffac54b25"
+    },
+    {
+      "skill": "document-release",
+      "renderedSource": "gstack-document-release",
+      "renderedSha256": "aa7ce758357c21f5e8dba1f1ddc0e77ef0b93e4d93b40661bd454abd017a8a11",
+      "stagedSha256": "01b4ac556854f75bda7788008acf9a099a2ca05f9d7f0d163b225609c4fec662"
+    },
+    {
+      "skill": "setup-deploy",
+      "renderedSource": "gstack-setup-deploy",
+      "renderedSha256": "ff294abaf08aaed564495a1b714e5593c095f031744c92d63707c23683a7e243",
+      "stagedSha256": "e35e8e99cf774ab4493a970fffa3a36f49c4e39aabea50cf04dd89b86b55f011"
+    },
+    {
+      "skill": "careful",
+      "renderedSource": "gstack-careful",
+      "renderedSha256": "1078a5bd65aa12b78fb9c5897f2a00e3c2b7f97ef51ff42edd18a66fa4806ae4",
+      "stagedSha256": "d13fd5e65abbaf3f26a3b075ee6dbbdb9cef366e4ccb5cd9ec08ed030c6e32fc"
+    },
+    {
+      "skill": "freeze",
+      "renderedSource": "gstack-freeze",
+      "renderedSha256": "df5dd63cb24b151e3b874045fb82fd9d6e1ac925b67feaf1707a99168ba0c02a",
+      "stagedSha256": "ad8aa8f126eabaee80e64b2761b6a1f9083f4afbf7ed45ddadab5173750d46fc"
+    },
+    {
+      "skill": "guard",
+      "renderedSource": "gstack-guard",
+      "renderedSha256": "ba1eabf2651663741ccd0a1c9457bf07dc1f34f89a85907ffbf5ec012081459b",
+      "stagedSha256": "3e57f6792d62621ff3254f8185c4227d1fe7a8661bc69eefe8b14c17443362c3"
+    },
+    {
+      "skill": "unfreeze",
+      "renderedSource": "gstack-unfreeze",
+      "renderedSha256": "a330adee935ffc70f7a34794e353d7ef6243e721c0650793fe442f73aaa2d815",
+      "stagedSha256": "72913674d84294fb3be90bc45db4eceaf94fa834bc897dc02a1d048e384b7c89"
+    },
+    {
+      "skill": "context-save",
+      "renderedSource": "gstack-context-save",
+      "renderedSha256": "2276899b18ba1829cd00c98bdbb62b5c47bfa02cd993109053670f964e28dc38",
+      "stagedSha256": "d8e088a1af56ffdceae6ba1caba709607f89e614404410ff51829704ee6a32e2"
+    },
+    {
+      "skill": "context-restore",
+      "renderedSource": "gstack-context-restore",
+      "renderedSha256": "0e617849a1e9a127b0b4af0b5bee32a8ae717ab4a5c1a65898fb9e25cf96500a",
+      "stagedSha256": "b5552344f5b6d1206848aae1ab1f01bd6db7b247344ad320c9f9aa8df222e582"
+    },
+    {
+      "skill": "learn",
+      "renderedSource": "gstack-learn",
+      "renderedSha256": "f5a53ccc829d0c3a7325e03d6e9701316d75c24d52f8e81b1cf80d883cbaf059",
+      "stagedSha256": "b6ca413b4b698f258f39de0bb043e8b57f8fc610e12079af43468aa52f6062c2"
+    },
+    {
+      "skill": "retro",
+      "renderedSource": "gstack-retro",
+      "renderedSha256": "e42d5e37aa7c274bb95dedf8c328e13a432fa7b5a15baedc9039a41f8cb3961e",
+      "stagedSha256": "4ab08c8633e36b2563b48ccaaff1466a8dcf826f707376077269dac289d63163"
+    },
+    {
+      "skill": "bontaflow-memory",
+      "origin": "Local BontaFlowStack skill; existing local helper contracts",
+      "stagedSha256": "26dc849cbb0e863913f2427fed126796953fcbe3fa68d171f084a2b6f9b2b432"
+    }
+  ],
+  "assets": [
+    {
+      "source": "browse/sections/command-list.md",
+      "sourceSha256": "eb17d99d718227e3ec5252fd2ea470f054f9185e8a38d9d8b30d373ae500aca0",
+      "destination": "plugins/bontaflowstack/skills/browse/sections/command-list.md",
+      "stagedSha256": "b975fb0732f9de266af27e7a76e504bf678b2d137c3f27ed1757d08647d29a10"
+    },
+    {
+      "source": "design-html/sections/detector-install-offer.md",
+      "sourceSha256": "23ce3d7014493566cff047fa3bd44d9e463ee3481d21e71148ff21aea5edde9e",
+      "destination": "plugins/bontaflowstack/skills/design-html/sections/detector-install-offer.md",
+      "stagedSha256": "b12fcf434746973f241d539ff0fa691a8ab192f723e6ca6fcf3cead88912a136"
+    },
+    {
+      "source": "office-hours/sections/phase-2a-startup-diagnostic.md",
+      "sourceSha256": "b5635c91482c2a70fd3c1b710a60afb33c729e598e2ad79061d92d482b27e596",
+      "destination": "plugins/bontaflowstack/skills/office-hours/sections/phase-2a-startup-diagnostic.md",
+      "stagedSha256": "fee1ce8312522bd75234fcf0edbf53463b522052b1a7798ec93b8f025ae77a28"
+    },
+    {
+      "source": "office-hours/sections/phase-2b-builder-brainstorm.md",
+      "sourceSha256": "03476cec5d6579458c5f35e34d8f033ccde5e355e74b195e211d74e74648af55",
+      "destination": "plugins/bontaflowstack/skills/office-hours/sections/phase-2b-builder-brainstorm.md",
+      "stagedSha256": "0a23a12f56b7829e3f91777930fe0c8e1dcfc4cb23e3dbc77c40f73be8b24e0f"
+    },
+    {
+      "source": "office-hours/sections/design-and-handoff.md",
+      "sourceSha256": "bb9b6be9d767079b30d3659fecea35b755e7a799a086db2023be639f06a95163",
+      "destination": "plugins/bontaflowstack/skills/office-hours/sections/design-and-handoff.md",
+      "stagedSha256": "08ebacba1ad3edd87859c1656ce253ab113feb02e13d1405d79d17920208b1ef"
+    },
+    {
+      "source": "plan-ceo-review/sections/review-sections.md",
+      "sourceSha256": "75ed0b6297e1db89dfff9436456845e5274218a5afee9828e1f060217c45a1f6",
+      "destination": "plugins/bontaflowstack/skills/plan-ceo-review/sections/review-sections.md",
+      "stagedSha256": "5402fe234ad8d94b47599f7a6ecd6dd365d9de0490f14f81bcb2171946f26329"
+    },
+    {
+      "source": "plan-design-review/sections/review-sections.md",
+      "sourceSha256": "b83629ee3988fd88312ea695ac6c89d46d9a110fc63fb2a7fd7c7fae8a2d8b40",
+      "destination": "plugins/bontaflowstack/skills/plan-design-review/sections/review-sections.md",
+      "stagedSha256": "5ba3aa7e57e2ac1e129a64d81cd6f6c26c64532229fe24915625bd0b21ef4ab3"
+    },
+    {
+      "source": "plan-devex-review/sections/review-sections.md",
+      "sourceSha256": "e95d83c912428c6cd84a3894ab773e9b3ac3e8a4b733e840ecbbefb28ae0268c",
+      "destination": "plugins/bontaflowstack/skills/plan-devex-review/sections/review-sections.md",
+      "stagedSha256": "af222fb7401445ea6f9815bcb62df9a6ce689d8310fbfc50ac60b008f24c9e14"
+    },
+    {
+      "source": "plan-eng-review/sections/review-sections.md",
+      "sourceSha256": "2962c63c17a2db87186f15f179cc5390a5b4eea28b2aaa3ba7588fd921c703f7",
+      "destination": "plugins/bontaflowstack/skills/plan-eng-review/sections/review-sections.md",
+      "stagedSha256": "bf08b588c63e3dceaa249c802452583417fcca1caeb74e456b80056647d14a87"
+    },
+    {
+      "source": "spec/sections/gate-and-file.md",
+      "sourceSha256": "4cabf8897bc433dbb4bde41660c7766fb26e6d63b90c93b798b7122073a2af59",
+      "destination": "plugins/bontaflowstack/skills/spec/sections/gate-and-file.md",
+      "stagedSha256": "48093f39c440f0a948c314bca5bfe656dd7948b3d239e9089453d176c61762ac"
+    },
+    {
+      "source": "qa/references/issue-taxonomy.md",
+      "sourceSha256": "af7fa568ca49316f60ed0919316b914fcd137f7abe2e75e7b296924aaaab0862",
+      "destination": "plugins/bontaflowstack/skills/qa/references/issue-taxonomy.md",
+      "stagedSha256": "b07405f39b5b5fd905e3eff1e61ff4a2e050090f9f6d2ebba0ac799c4c89728b"
+    },
+    {
+      "source": "qa/templates/qa-report-template.md",
+      "sourceSha256": "fa252c4f41a4e096fd54cf98e88c1cbcf21ca05cc84d5974d09e3408ab166833",
+      "destination": "plugins/bontaflowstack/skills/qa/templates/qa-report-template.md",
+      "stagedSha256": "fd262292d0feee41025a0c8615101909ad7d41ca2373c52d0bc1566fb13e2eb7"
+    },
+    {
+      "source": "BontaFlowStack locally maintained documentation",
+      "destination": "plugins/bontaflowstack/skills/design-html/sections/pretext.md",
+      "stagedSha256": "3f307fa13aaaa39ca9ecd3e27e51593c5e4ca19496df7d739dec3e87ea4b10c3"
+    },
+    {
+      "source": "BontaFlowStack locally maintained documentation",
+      "destination": "plugins/bontaflowstack/skills/qa/references/health-score.md",
+      "stagedSha256": "b9fb32df32263311c68cd72befdec62c34ce17d1343efd0b7d8d3cf1ce07bbb8"
+    }
+  ]
+}

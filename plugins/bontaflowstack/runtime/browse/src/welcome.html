@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BontaFlowStack · Codex-browser</title>
+<style>
+  :root {
+    --amber-400: #FBBF24;
+    --amber-500: #F59E0B;
+    --zinc-400: #A1A1AA;
+    --zinc-600: #52525B;
+    --zinc-800: #27272A;
+    --surface: #141414;
+    --base: #0C0C0C;
+    --border: #262626;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100vh; overflow: auto; }
+  body {
+    background: var(--base);
+    color: #e4e4e7;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+  }
+  .page { width: 100%; max-width: 1060px; padding: 48px 40px; }
+
+  /* Sidebar prompt — points RIGHT toward where sidebar opens */
+  .sidebar-prompt {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: opacity 300ms ease-out;
+  }
+  .sidebar-prompt .bubble {
+    background: var(--amber-500);
+    color: #000;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 10px;
+    max-width: 220px;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .sidebar-prompt .arrow-right {
+    font-size: 28px;
+    color: var(--amber-500);
+    animation: nudge 1.5s ease-in-out infinite;
+  }
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+  }
+  .sidebar-prompt.hidden { opacity: 0; pointer-events: none; }
+
+  /* Hero */
+  .hero { margin-bottom: 36px; }
+  .logo-row { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .logo-dot {
+    width: 10px; height: 10px; border-radius: 50%; background: var(--amber-500);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(245,158,11,0); }
+  }
+  .logo-text { font-family: 'Satoshi', sans-serif; font-weight: 900; font-size: 28px; color: #fff; letter-spacing: -0.5px; }
+  .tagline { font-size: 15px; color: var(--zinc-400); max-width: 560px; line-height: 1.6; }
+
+  /* Feature cards — 3 columns for 6 cards */
+  .features { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+  .feat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .feat-title {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .feat p { font-size: 13px; color: var(--zinc-400); line-height: 1.5; }
+  .feat .hl { color: #e4e4e7; font-weight: 500; }
+  .feat code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--amber-400);
+    background: rgba(245,158,11,0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* Try it strip */
+  .try-strip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .try-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--amber-400);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .try-items { display: flex; flex-direction: column; gap: 8px; }
+  .try-item {
+    font-size: 13px;
+    color: var(--zinc-400);
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+  .try-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--zinc-600);
+  }
+  .try-item .hl { color: #e4e4e7; font-weight: 500; }
+
+  /* Footer */
+  .footer {}
+  .footer p { font-size: 12px; color: var(--zinc-600); }
+  .footer a { color: var(--zinc-400); text-decoration: none; }
+  .footer a:hover { color: var(--amber-400); }
+
+  @media (max-width: 900px) {
+    .features { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .features { grid-template-columns: 1fr; }
+    html, body { overflow: auto; }
+    .sidebar-prompt { right: 40px; }
+  }
+@media (prefers-reduced-motion: reduce) { *, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="sidebar-prompt" id="sidebar-prompt">
+  <div class="bubble">Az oldalsávban követheted a böngésző műveleteit. Megnyitásához válaszd a BontaFlowStack bővítményt az eszköztáron.</div>
+  <span class="arrow-right" aria-hidden="true">&#x2192;</span>
+</div>
+<main class="page">
+  <header class="hero">
+    <div class="logo-row"><div class="logo-dot" aria-hidden="true"></div><h1 class="logo-text">BontaFlowStack · Codex-browser</h1></div>
+    <p class="tagline">A böngészőt a meglévő Codex-feladatodból használhatod. Itt látod a megnyitott oldalakat és a végrehajtott lépéseket.</p>
+  </header>
+  <section class="features" aria-label="Használat">
+    <div class="feat"><h2 class="feat-title">Folytasd a Codexben</h2><p>Add meg az oldalt és a célt: olvasás, adatkinyerés, felületi ellenőrzés vagy egy engedélyezett folyamat kipróbálása.</p></div>
+    <div class="feat"><h2 class="feat-title">Jelentkezz be kézzel</h2><p>Ha az oldal belépést kér, jelentkezz be ebben az ablakban. Utána jelezd a Codexben, hogy folytatható a munka.</p></div>
+    <div class="feat"><h2 class="feat-title">Ellenőrizhető eredmények</h2><p>A képernyőképek, kiolvasott adatok és hibák a konkrét feladathoz kapcsolódnak. A böngésző megnyitása önmagában még nem sikeres teszt.</p></div>
+    <div class="feat"><h2 class="feat-title">Képernyőkép</h2><p>Az oldalsáv Screenshot gombja a megnyitott oldalról helyi képfájlt készít. A Codex-feladatban kérheted a kép ellenőrzését.</p></div>
+    <div class="feat"><h2 class="feat-title">Felület vizsgálata</h2><p>Az Inspector megmutatja egy kijelölt elem stílusait. Az adatokat kimásolhatod a Codex-feladatba; a próbált stílusváltozások a böngészőben láthatók.</p></div>
+    <div class="feat"><h2 class="feat-title">Helyi működés</h2><p>Ez a kezdőoldal internet nélkül is elérhető. A céloldal hálózati elérése és a bejelentkezés külön előfeltétel.</p></div>
+  </section>
+  <section class="try-strip" aria-label="Példakérés">
+    <h2 class="try-title">Próbáld ki a Codex-feladatodban</h2>
+    <p class="try-item">„Nyisd meg a helyi alkalmazásomat, olvasd el a főoldalt, és készíts róla képernyőképet.”</p>
+  </section>
+</main>
+<script>
+document.addEventListener('bfstack-extension-ready', () => {
+  document.getElementById('sidebar-prompt')?.classList.add('hidden');
+});
+</script>
+</body>
+</html>

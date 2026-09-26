@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# BontaFlowStack local workflow start. Configuration is read, never changed here.
+set -euo pipefail
+SKILL_NAME="unknown"
+MODEL_OVERLAY="none"
+PARENT_PID="$PPID"
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --skill|--model|--parent-pid)
+      [ $# -ge 2 ] || { echo "Missing argument for $1" >&2; exit 1; }
+      case "$1" in
+        --skill) SKILL_NAME="$2" ;;
+        --model) MODEL_OVERLAY="$2" ;;
+        --parent-pid) PARENT_PID="$2" ;;
+      esac
+      shift 2 ;;
+    *) echo "Unknown start argument: $1" >&2; exit 1 ;;
+  esac
+done
+[[ "$SKILL_NAME" =~ ^[a-z][a-z0-9-]*$ ]] || { echo 'Invalid skill name' >&2; exit 1; }
+[[ "$PARENT_PID" =~ ^[0-9]+$ ]] || { echo 'Invalid parent PID' >&2; exit 1; }
+[[ "${CODEX_THREAD_ID:-}" =~ ^[A-Za-z0-9_-]{1,128}$ ]] || { echo 'Actual Codex task ID required' >&2; exit 1; }
+_BIN=$(cd "$(dirname "$0")" && pwd)
+_GH="${BFSTACK_HOME:?Packaged state root required}"
+_BRANCH=$(git branch --show-current 2>/dev/null | tr -cd 'a-zA-Z0-9._/-') || _BRANCH=""
+_BRANCH=${_BRANCH:-unknown}
+_TEL_START=$(date +%s)
+_SID_RAND=$(od -An -N4 -tx4 /dev/urandom | tr -d ' \n')
+_SESSION_ID="$PARENT_PID-$_TEL_START-$_SID_RAND"
+echo "SKILL_START_PROTO: 1"
+echo "SESSION_ID: $_SESSION_ID"
+echo "TEL_START: $_TEL_START"
+echo "BRANCH: $_BRANCH"
+echo "MODEL_OVERLAY: $MODEL_OVERLAY"
+echo "SESSION_KIND: $("$_BIN/bfstack-session-kind")"
+for _KEY in proactive skill_prefix explain_level question_tuning checkpoint_mode checkpoint_push routing_declined; do
+  _VALUE=$("$_BIN/bfstack-config" get "$_KEY")
+  printf '%s: %s\n' "$(printf '%s' "$_KEY" | tr '[:lower:]' '[:upper:]')" "$_VALUE"
+done
+_HAS_ROUTING=no
+for _FILE in AGENTS.override.md AGENTS.md; do
+  if [ -f "$_FILE" ] && grep -q '^## Skill routing' "$_FILE"; then _HAS_ROUTING=yes; fi
+done
+echo "HAS_ROUTING: $_HAS_ROUTING"
+# Record before returning, so an immediate completion cannot overtake its start.
+"$_BIN/bfstack-timeline-log" '{"skill":"'"$SKILL_NAME"'","event":"started","branch":"'"$_BRANCH"'","session":"'"$_SESSION_ID"'"}'

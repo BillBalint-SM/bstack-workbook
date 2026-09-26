@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# bfstack-review-read — read review log and config for dashboard
+# Usage: bfstack-review-read
+#
+# Emits, in order: the raw reviews JSONL, ---CONFIG--- (skip_eng_review),
+# ---HEAD--- (short sha), ---WTREE--- (current working-tree fingerprint from
+# bin/bfstack-wtree, or "unknown"), ---TREE--- (HEAD tree, informational) and
+# ---DIRTY--- (tracked-file dirty flag). Consumers grade diff-scoped review
+# rows CURRENT when a record's `wtree` equals ---WTREE---; everything needed
+# for that rule ships in this one output so graders run no extra commands.
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+eval "$("$SCRIPT_DIR/bfstack-slug" 2>/dev/null)"
+BFSTACK_HOME="${BFSTACK_HOME:-$HOME/.bfstack}"
+cat "$BFSTACK_HOME/projects/$SLUG/$BRANCH-reviews.jsonl" 2>/dev/null || echo "NO_REVIEWS"
+echo "---CONFIG---"
+"$SCRIPT_DIR/bfstack-config" get skip_eng_review 2>/dev/null || echo "false"
+echo "---HEAD---"
+git rev-parse --short HEAD 2>/dev/null || echo "unknown"
+echo "---WTREE---"
+"$SCRIPT_DIR/bfstack-wtree" 2>/dev/null || echo "unknown"
+echo "---TREE---"
+git rev-parse 'HEAD^{tree}' 2>/dev/null || echo "unknown"
+echo "---DIRTY---"
+if [ -n "$(git status --porcelain -uno 2>/dev/null | head -1)" ]; then echo "true"; else echo "false"; fi
+

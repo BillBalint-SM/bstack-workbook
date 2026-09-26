@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Advisory execution context; it never answers a question or grants permission.
+set -euo pipefail
+if [ "${BFSTACK_SESSION_KIND:-}" = "spawned" ]; then
+  echo spawned
+elif [ -n "${BFSTACK_HEADLESS:-}" ] || [ -n "${CI:-}" ] || [ -n "${GITHUB_ACTIONS:-}" ]; then
+  echo headless
+else
+  echo interactive
+fi

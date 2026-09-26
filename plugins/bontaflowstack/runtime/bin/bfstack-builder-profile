@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# bfstack-builder-profile — LEGACY SHIM.
+#
+# Superseded by bin/bfstack-developer-profile. This binary now delegates to
+# `bfstack-developer-profile --read` to keep /office-hours working during the
+# transition. When all call sites have been updated, this file can be removed.
+#
+# The migration from ~/.bfstack/builder-profile.jsonl to the unified
+# ~/.bfstack/developer-profile.json happens automatically on first read —
+# see bin/bfstack-developer-profile --migrate for details.
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+exec "$SCRIPT_DIR/bfstack-developer-profile" --read "$@"
+

@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "prior Windows/Codex port; see docs/references.md",
+    "revision": "5fcee0c4e7913ce5ace55ad450aab4ae20482f4b"
+  },
+  "entries": [
+    {
+      "source": "scripts/bstack-questions.ts",
+      "sourceBlob": "a98899fe3d9e767cebef7df77f04de9425716e52",
+      "sourceSha256": "54c474f0a915f659957c5585872200b3aa1b3184291a2d4f4cbc804b3d697fdb",
+      "destination": "plugins/bontaflowstack/runtime/scripts/bfstack-questions.ts",
+      "destinationSha256": "3b3a65cf95dda5da58ff8ca1c59f9b03fb78533047a37938094efff4d0743c31",
+      "changes": [
+        "bfstack operational names",
+        "bounded 1 MiB stdin",
+        "malformed secret hint skips",
+        "Codex adaptation: selected package/project scope and preserved shared behavior.",
+        "Codex question adapter: skip blank, missing, secret and asynchronous answers with redacted diagnostics."
+      ]
+    },
+    {
+      "source": "scripts/bstack-safety.ts",
+      "sourceBlob": "2aceed406389bf9b49371c4c6a96dd272039cec7",
+      "sourceSha256": "30b729a99af2b003865aceac89d7d65b1064ab283452fde661014b4d8e08a896",
+      "destination": "plugins/bontaflowstack/runtime/scripts/bfstack-safety.ts",
+      "destinationSha256": "79727540b2d525a1e1cebd4fd06ad865408867a90c4c0599ef87b8fe694a0dbe",
+      "changes": [
+        "bfstack operational names",
+        "runtime-relative careful classifier",
+        "project and session scoped safety state",
+        "namespaced apply-patch and exec matching",
+        "validated PreToolUse additionalContext execution observation scoped to native session and canonical project hash",
+        "read-only safety status returns current session/project scope without creating state",
+        "Local memory scope; retained neutral process helper import, removed outward memory environment.",
+        "Codex adaptation: selected package/project scope and preserved shared behavior."
+      ]
+    },
+    {
+      "source": "scripts/question-registry.ts",
+      "sourceBlob": "eb1bf0f98bda7ecdee5ea6186828d2fad3b595f9",
+      "sourceSha256": "1a6c41753c3efe3f0caf3808fcad5e3857401d3df5b4ff6eec2bdc03b0e828c9",
+      "destination": "plugins/bontaflowstack/runtime/scripts/question-registry.ts",
+      "destinationSha256": "0985cd1056b4048653d7b1ff729148df63992411b3e2546229d4bfa52616e8dd",
+      "changes": [
+        "bfstack operational names",
+        "Local memory scope; retained neutral process helper import, removed outward memory environment.",
+        "Codex adaptation: selected package/project scope and preserved shared behavior."
+      ]
+    },
+    {
+      "source": "scripts/one-way-doors.ts",
+      "sourceBlob": "61c0b24eaeec133afa399cd032d2106597bc4ff8",
+      "sourceSha256": "d080aded8a03ad2ef179aa9527fd304d97c77f4c33463419292e97bf8656cb2f",
+      "destination": "plugins/bontaflowstack/runtime/scripts/one-way-doors.ts",
+      "destinationSha256": "69f4735a94fb54ca526ae1e17598ddf8c6a80648d7e91c6c4e5a1ffe452cc417",
+      "changes": [
+        "bfstack operational names"
+      ]
+    },
+    {
+      "source": "hosts/claude/hooks/question-log-hook.ts",
+      "sourceBlob": "62952a77839887326a9cd25b1c9f4742932660c0",
+      "sourceSha256": "cc5ec7d135a3b7fedd4ccfe325f441bb28416edcb07b56f1c5829c7c971773c3",
+      "destination": "plugins/bontaflowstack/runtime/hosts/codex/hooks/question-log-hook.ts",
+      "destinationSha256": "5f0c9b1f05fb2e1a716e240f176aa0db0d7d8582efc04dd722999dff6b0e5640",
+      "changes": [
+        "bfstack operational names",
+        "Codex adaptation: selected package/project scope and preserved shared behavior."
+      ]
+    },
+    {
+      "source": "hosts/claude/hooks/question-preference-hook.ts",
+      "sourceBlob": "d26d970ce4b687894d90b436674d1dfba5d7e931",
+      "sourceSha256": "cdc7836b8c97fac96626c1dac104991fbf448e5edc555366ab73b43559d2b772",
+      "destination": "plugins/bontaflowstack/runtime/hosts/codex/hooks/question-preference-hook.ts",
+      "destinationSha256": "9c51504631428a02bf5061194921a4a86b13012b4ccea47fea44937d73fac102",
+      "changes": [
+        "bfstack operational names",
+        "automatic preference enforcement off by default",
+        "Codex adaptation: selected package/project scope and preserved shared behavior."
+      ]
+    },
+    {
+      "source": "hosts/claude/hooks/spawn-bin.ts",
+      "sourceBlob": "c3bef0b042eb34b5934c7f3463323df9dc6e3d71",
+      "sourceSha256": "fb5f0504006359e9fb08776a12bfb2e1404e77ddaaf41b5f6f037f5f03d3938a",
+      "destination": "plugins/bontaflowstack/runtime/hosts/codex/hooks/spawn-bin.ts",
+      "destinationSha256": "13d6642befd3272cdd06e94770fa41252e99f89da1d7cb5f421ff007d1ce2d97",
+      "changes": [
+        "bfstack operational names",
+        "Codex adaptation: selected package/project scope and preserved shared behavior."
+      ]
+    },
+    {
+      "source": "hosts/claude/hooks/timeline-stop-hook.ts",
+      "sourceBlob": "30fca9f8b0d8a4ac19d6c83b1cf07b72c6421464",
+      "sourceSha256": "692421daa2528abaf6331da7cba4c166fdf0b7ca8fb3c33a14863d83f115dc10",
+      "destination": "plugins/bontaflowstack/runtime/hosts/codex/hooks/timeline-stop-hook.ts",
+      "destinationSha256": "bd68621e24122d492a0250f7d747db37f56358347c0699829cfddb7cad138e1d",
+      "changes": [
+        "bfstack operational names",
+        "native session correlation",
+        "waiting-user and ambiguous-run protection",
+        "Codex adaptation: selected package/project scope and preserved shared behavior."
+      ]
+    },
+    {
+      "source": "hosts/claude/hooks/spawned-directive.ts",
+      "sourceBlob": "bde51a766f43afb431d7767ea39af24e06e04aab",
+      "sourceSha256": "6f002cb90185e57fe9d58505f03bb31bd86fd5415a69c931af8bb5be545b0a7c",
+      "destination": "plugins/bontaflowstack/runtime/hosts/codex/hooks/spawned-directive.ts",
+      "destinationSha256": "877f3e9a84bc4635e931f58e8f6c72d2e3d402fc34af8172afb04e18eb131c32",
+      "changes": [
+        "bfstack operational names"
+      ]
+    },
+    {
+      "source": "careful/bin/check-careful.sh",
+      "sourceBlob": "11993f110e6d460877004fd7a631827d0080fd8e",
+      "sourceSha256": "23dc8fa32afa75ac44a93328157d2e9afc8a286eb41cccfdd6340bbfd72bfed2",
+      "destination": "plugins/bontaflowstack/runtime/careful/bin/check-careful.sh",
+      "destinationSha256": "8f028d11e2f0246ef4668e00f582eb6d3e688e264c5e9019c25c7589cf4093df",
+      "changes": [
+        "bfstack operational names",
+        "runtime-relative bfstack helpers",
+        "Codex adaptation: selected package/project scope and preserved shared behavior."
+      ]
+    },
+    {
+      "source": "careful/bin/hook-extract.sh",
+      "sourceBlob": "594b4d6c00db0a1224ed44b6b92bf70757e713a3",
+      "sourceSha256": "5be66386d4945f27ba52ac3df720a8f84755634de1713eacbd239376050106c9",
+      "destination": "plugins/bontaflowstack/runtime/careful/bin/hook-extract.sh",
+      "destinationSha256": "e01b8bae778df3689b818ffd1299eabee9345ea871e7965c765d6317320ac987",
+      "changes": [
+        "bfstack operational names",
+        "Codex adaptation: selected package/project scope and preserved shared behavior."
+      ]
+    },
+    {
+      "source": "plugin/bstack/scripts/bstack.ps1",
+      "sourceBlob": "be02faf994b4ff8ec546435f551ee5c7b44b8a8f",
+      "sourceSha256": "b93e9849814b709e8a893236104e99c4262ce8b8b4d012a6467101065a7ba556",
+      "destination": "plugins/bontaflowstack/scripts/bfstack.ps1",
+      "destinationSha256": "dd20f816cb4f8862ebac57c380ac5e1810e22a886e1e9899d23a2f1205fe3ff2",
+      "changes": [
+        "package-relative runtime and tools",
+        "explicit developer-tool opt-in",
+        "preserved UTF-8/stdin forwarding and safety exit codes",
+        "strip leading BOM at the PowerShell boundary",
+        "remove unreachable legacy seal verifier; package integrity is checked by the ZIP validator"
+      ]
+    },
+    {
+      "source": "scripts/bstack-runtime.ts",
+      "sourceBlob": "a9e25d6d3dedf0b9765d03e84663052ec6cf817a",
+      "sourceSha256": "164611b18977fd662f69627161be6e9343f61e9e7407d891ab6b53799938bcda",
+      "destination": "plugins/bontaflowstack/runtime/scripts/bfstack-runtime.ts",
+      "destinationSha256": "afa6d08a3f6a4489d97bad33d26941395543f58937cc8c8a5941ff0e7a95fdd7",
+      "changes": [
+        "package-relative skill and executable paths",
+        "canonical LOCALAPPDATA state default",
+        "packaged tools on every hook child PATH",
+        "same existing safety/question/lifecycle handlers",
+        "preserved real project slug bootstrap",
+        "packaged Node and Playwright paths; project/task scoped browser state",
+        "Packaged state isolation: canonical state paths; no implicit legacy installation fallback.",
+        "Local memory scope; retained neutral process helper import, removed outward memory environment.",
+        "Codex adaptation: selected package/project scope and preserved shared behavior."
+      ]
+    }
+  ]
+}

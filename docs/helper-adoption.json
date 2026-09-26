@@ -1,0 +1,599 @@
+{
+  "status": "adapted-local-memory-reduced-scope",
+  "sourceRevision": "5fcee0c4e7913ce5ace55ad450aab4ae20482f4b",
+  "nativeAcceptance": "NOT_RUN",
+  "entries": [
+    {
+      "source": "bin/gstack-builder-profile",
+      "sourceBlob": "be3bd46a4cb7a9fcf954c1577669e728fc57976a",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-builder-profile",
+      "destinationSha256": "40de4d07deabcd4d9dfed0d177821b7e69ee3620e4711477c9999e299ecbab0d",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-codex-probe",
+      "sourceBlob": "66a0bb25423cdd5cbf6e6db499e16964ade7f257",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-codex-probe",
+      "destinationSha256": "218c177e77c5b2c1baf5c85bdd70c699b207a210a43b90cef0a02af55a59a0c8",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Packaged state isolation: canonical state paths; no implicit legacy installation fallback."
+    },
+    {
+      "source": "bin/gstack-config",
+      "sourceBlob": "5ff9071c830e870540620a7648113a5d894e1887",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-config",
+      "destinationSha256": "952c1a90277b25392cbc1b6a8d5d771100218efb62d992e4bd33933c89229314",
+      "modification": "Operational bfstack renaming; package-local Windows installation guide reference. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-decision-log",
+      "sourceBlob": "bfe27acc6f53f01470f535c9190eb6584f417f45",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-decision-log",
+      "destinationSha256": "e29d348d5682ba4e3a6f671f16f4f47f07bf33dd5e43aa1a6fe113af1e1808da",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-decision-search",
+      "sourceBlob": "2b8188023c362c67eff90a394efd72ac0c898d05",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-decision-search",
+      "destinationSha256": "4505686ba917321207f1a1e7d2f61c32ff1eff8cd7c881ac060912bcc00eae43",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-design-detect.ts",
+      "sourceBlob": "c4bcb278350549791e5655eb71d6b228b86dca6b",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-design-detect.ts",
+      "destinationSha256": "92b986d122628bd25e24fb4203be22ff34c3ce1523b4eb0cea9b671c3993f1e8",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-design-md.ts",
+      "sourceBlob": "ec2f419f238b643e7c45173d86e1abaa7072a440",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-design-md.ts",
+      "destinationSha256": "c4bdfdc97808091fc125ee38971f8f53fafe575f824a68bfec49a4202295bda5",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-detach",
+      "sourceBlob": "1f27f9246ff053031437d88f2dd4364b8cfe8b6f",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-detach",
+      "destinationSha256": "ffbb3c98c49ea96b7d24457fbc30c7c8b23a37bb08b4f0bb0de0866e05247b96",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-developer-profile",
+      "sourceBlob": "57ba9adb9d5ea09a8969ba4a1d5064aa8bddc0c7",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-developer-profile",
+      "destinationSha256": "778d94a173a85527215d80a6c0f6db4d281716ae0bd26e44f98edb96afbc9216",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-diff-scope",
+      "sourceBlob": "17da9c65672826a3ca0e5984e1b1834095916977",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-diff-scope",
+      "destinationSha256": "5b0240f907c2e767afac1c1ae75a483fd160d351cc2affa1b7c6f04ad1f2192c",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-distill-apply",
+      "sourceBlob": "5b97da0aaa3c4657be8797b5963db998e8ec899c",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-distill-apply",
+      "destinationSha256": "2b6b69abce9026edeba41f6b3386093769c09a9dcc8f209aadfb8e69ef00b431",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-egress",
+      "sourceBlob": "4ff92ad0fcd66e4d06af8f8a3f72dc2f2892154d",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-egress",
+      "destinationSha256": "9652bdbb99370f0f36e86260f3122da28b19b9c00d6f1d98dd80825874c93715",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-egress-lib.sh",
+      "sourceBlob": "37fe045a7d16e9fc3a645aae5f7f6a32853789ba",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-egress-lib.sh",
+      "destinationSha256": "3d0b3a69dbdeebdcfe98ae2455c3bd69f41beeed67f991adf0c2d3037f62327b",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-egress-receipt",
+      "sourceBlob": "b2d903d53123b836f9d710cbd203dea65ec18f72",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-egress-receipt",
+      "destinationSha256": "4535f10c36244056d174c16b7597d5cd9fc49fb39f2aa70769b4abe76b446d20",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-evidence",
+      "sourceBlob": "ae77d6ebdc66889b10603cb4cb816b6dff56cf6e",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-evidence",
+      "destinationSha256": "3a0e62ff55e32d3d6ed579683e0e0cfa3ff10c78d40ee7903d34853b01a1adae",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-first-task-detect",
+      "sourceBlob": "97a1a7a63deb0c79e09145cc25a004de419d60f4",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-first-task-detect",
+      "destinationSha256": "c55d523d4e5aa582bfdf37c3026e7c90487047d88a467a4667ddbf82837b0e7e",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-global-discover.ts",
+      "sourceBlob": "79189e42a277c6cbce22a60ed48275bd97d6f31f",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-global-discover.ts",
+      "destinationSha256": "764ed6577170d5ce1cb55b7c96f39545b2b5f49ca3ad2a3699e47de178baa667",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior with neutral path examples. Retired helper: fails explicitly without modifying profiles or scanning unselected repositories."
+    },
+    {
+      "source": "bin/gstack-issue-guard",
+      "sourceBlob": "a9c15276d27731f537957e2e4edea9ec2b2e3489",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-issue-guard",
+      "destinationSha256": "8eb421df354de35b4cb3a91886135ab9af9b25e0a035e5d15af5fbaecf3745ad",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-learnings-log",
+      "sourceBlob": "fa6e09324c2786a09b254dca47950d8b2181fa07",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-learnings-log",
+      "destinationSha256": "7187463d936b8bd2c95d40fba095053e585aad62a140dd315b58da5398850a7c",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-learnings-search",
+      "sourceBlob": "d7038e821881861f9661af2f34f3728bf1cabe23",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-learnings-search",
+      "destinationSha256": "94ff831234e78181e61e90435a7b00128f00e9e5ef8249610a8b846e546bebbe",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-next-version",
+      "sourceBlob": "1df13aad8e7d4f30e2249e2a0ade49d4e72dee35",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-next-version",
+      "destinationSha256": "8ac6d3bc1c765a34b475a7a44f1cfb1de7312c5e9ad9e04d9ed6742d946c6c67",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-patch-names",
+      "sourceBlob": "bef02aae4c0b3ccce7b1983a977c475c1a629186",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-patch-names",
+      "destinationSha256": "042452148fd5c9e907e679bebe87bc78256457889d340e2a147421fab8fc2674",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-paths",
+      "sourceBlob": "5b66e3102ff5c55b76bf88b0a2cdc31ae6b83d56",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-paths",
+      "destinationSha256": "60ca9a5abac50b43a06832027330f2bd39c697db80d862c2daf5393dc68d9b1c",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior with neutral path examples. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-question-log",
+      "sourceBlob": "e614e8f8ee3ae6ef1dbf3b00084687729f06beb7",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-question-log",
+      "destinationSha256": "1601609635c7e62752d189cf8c462bd3bc92208b2b3dc54a614245012e152392",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-question-preference",
+      "sourceBlob": "cbda178a3db0fc7841be334088380c375d9736b6",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-question-preference",
+      "destinationSha256": "c8bf36d54ad0b4ecb26cd8f392506a66c7be785c9d231941c09d2ff22c6c2cc0",
+      "modification": "Operational bfstack renaming; validate before file creation and atomically replace preference JSON."
+    },
+    {
+      "source": "bin/gstack-redact",
+      "sourceBlob": "fdf4e63634242f53f891d8e8c41b601afd2eeb85",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-redact",
+      "destinationSha256": "f1d8103196990eb104b020099006983274816afc93b5d47d32a3242677b0ab0b",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-redact-prepush",
+      "sourceBlob": "3e678f3a3b536eb347d68768c01625dcff19f267",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-redact-prepush",
+      "destinationSha256": "8735671b95cf7d5191e6737793e7d19a61730aa05be4478b1186bdda3c52f729",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-relink",
+      "sourceBlob": "ecc609caefbb4827563bd936c5ff0097d3edaa6f",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-relink",
+      "destinationSha256": "03cf1f78216cc08e02dc40c1c824e8ab87506940f347de09c52afcc16fb42207",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior. Retired helper: fails explicitly without modifying profiles or scanning unselected repositories."
+    },
+    {
+      "source": "bin/gstack-render.ts",
+      "sourceBlob": "060eb94744fef3c00b7ac7d78b11f56ccd0f108b",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-render.ts",
+      "destinationSha256": "2c28bd9d9edf2b0af8aeb720d838857ced4527d4a2737fde05a10954649c6e23",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-repo-mode",
+      "sourceBlob": "a5c5a6ba64db25371e133ab777a4e6042694402e",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-repo-mode",
+      "destinationSha256": "62e132df6d494621ec429b25470c878b2bafd81a6248180dca6efff25c1d71fa",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Packaged state isolation: canonical state paths; no implicit legacy installation fallback."
+    },
+    {
+      "source": "bin/gstack-retro-metrics",
+      "sourceBlob": "58c2c0518078ee22aeab674f82544d3d4c3366eb",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-retro-metrics",
+      "destinationSha256": "ce911bc5c8d82c17d74dfb41f5aecae7e344b15317b280b42867f36b47748605",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Recognizes Windows Test-*.ps1 basenames case-insensitively in insertion, changed-file, and census metrics."
+    },
+    {
+      "source": "bin/gstack-review-log",
+      "sourceBlob": "672e644fb5b9dc0bc17004a268b77fb50cda1117",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-review-log",
+      "destinationSha256": "0243e52b59f55e1a87c66be63e96d802e77a90d2ede4ac501da51c0f6cde0981",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-review-read",
+      "sourceBlob": "8400240ee62d66081d3fe66eab640927abd41dc8",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-review-read",
+      "destinationSha256": "2a5121994513922238062956738c9f674a8ef7ed77421c78ddc5b5be55e14d33",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-session-kind",
+      "sourceBlob": "2fd25f831167b96aa5c75e501c16d45253b4e63f",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-session-kind",
+      "destinationSha256": "7e7bacf5f7002632f84b6da15e08ac30872d40efe28fb75b7e17f3e84e92a276",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-settings-hook",
+      "sourceBlob": "b755752f9df9a1513c30450419f09becea7197c6",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-settings-hook",
+      "destinationSha256": "76b77bc63ba1748301c18b23b49e4799ceed286159ba7872a2ec030457b4ca7e",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior. Retired helper: fails explicitly without modifying profiles or scanning unselected repositories."
+    },
+    {
+      "source": "bin/gstack-skill-end",
+      "sourceBlob": "b4b3b01744ca13a8dd997e585fa1359c570814d3",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-skill-end",
+      "destinationSha256": "a733e3e5a8522678cfb59f5e4396b700d6fc6a23282d289bc5785a7b12c01ebf",
+      "modification": "Operational bfstack renaming; packaged runtime skips automatic brain-sync drain while explicit sync remains available. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-skill-start",
+      "sourceBlob": "4e03020670bcec1e14c2d33664ea65db94da3872",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-skill-start",
+      "destinationSha256": "f2b674a7e9ea6f86faa8c704afc758569c0a18b20fb81a53549e1a7472bdfcfa",
+      "modification": "Operational bfstack renaming; packaged runtime skips legacy profile inspection, gbrain hints, and automatic artifact sync. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-slug",
+      "sourceBlob": "12f0ed3972c6c886d29dbcec521e22c71f0a2c30",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-slug",
+      "destinationSha256": "23d037286dd2e990f6cf08e54217fe67b47c4b5bba331663fd495688ccb6c32c",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior with neutral path examples."
+    },
+    {
+      "source": "bin/gstack-specialist-stats",
+      "sourceBlob": "3349c2b715b678ce9499c7f8fadddf7418de6568",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-specialist-stats",
+      "destinationSha256": "9daedfd65c2bf5022b2e4919d62624bc784d11fd2ecebbe1747c08ffb012ef17",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-taste-update",
+      "sourceBlob": "4782552d227f977e4e375a6aed7882b1501c600b",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-taste-update",
+      "destinationSha256": "c12f25711bfc4d18a39f630a6647fbe5c53dce17d994629f9e2ce4eb4dc33c08",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-team-init",
+      "sourceBlob": "d4e368a2cf2390c3c3eafa3cae1ca596bc1fc8b5",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-team-init",
+      "destinationSha256": "fa11abc0b82acbbf4cc727a3d4f202e067ff7141f069f9b01465035362fbd095",
+      "modification": "Operational bfstack renaming; generated install guidance targets the prepared Codex Desktop package. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior. Retired helper: fails explicitly without modifying profiles or scanning unselected repositories."
+    },
+    {
+      "source": "bin/gstack-timeline-log",
+      "sourceBlob": "89efaf2bb15e7c5bd95006a11417bc6138f76db9",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-timeline-log",
+      "destinationSha256": "884dda6101dd464f9173bdf3e6440e8c90305a6687ca56178046adcdc5d45d18",
+      "modification": "Operational bfstack renaming; enriches legacy payloads with required native Codex session and project fields. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "bin/gstack-uninstall",
+      "sourceBlob": "eaa30a013a28c047a7d4378f601683f5d4f64ff9",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-uninstall",
+      "destinationSha256": "0b8d20ff6901e58a73708b6846efdba1e60895951054f4b81643a338861333e7",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior. Retired helper: fails explicitly without modifying profiles or scanning unselected repositories."
+    },
+    {
+      "source": "bin/gstack-verify-gate",
+      "sourceBlob": "41f02cb5a046483fdf69d0426cddf6a65e9f7a3f",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-verify-gate",
+      "destinationSha256": "dce23f7054cc67e16e8066af5db1c0ef1025d35cff245d3adb6bb76844636312",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Retired helper: fails explicitly without modifying profiles or scanning unselected repositories."
+    },
+    {
+      "source": "bin/gstack-version-bump",
+      "sourceBlob": "a7de4e14c32e12d1f845f3f2fcfae4359517e299",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-version-bump",
+      "destinationSha256": "6c590442966205a353b76e6a058452608427ad00ce871626f98ce01af92182c8",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "bin/gstack-wtree",
+      "sourceBlob": "6dd152bdfd1ff850156e74c546527d5c7a38d829",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-wtree",
+      "destinationSha256": "6dc93101b5f102fe5519656ddd5904aa1c63b54be4918fdf3ed553a4402965c3",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "lib/aside-render.ts",
+      "sourceBlob": "ff7aa5d76ad9f8432cdca6a1bbfccdfc87514c42",
+      "destination": "plugins/bontaflowstack/runtime/lib/html-render.ts",
+      "destinationSha256": "7c7e244937f3826c32fbb986cf10823da6b8f330a127ce5ae0517b10721b19a0",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Packaged state isolation: canonical state paths; no implicit legacy installation fallback. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "lib/design-catalog.ts",
+      "sourceBlob": "da67f8ffb219691022b55237dfee26c4a7bff0bc",
+      "destination": "plugins/bontaflowstack/runtime/lib/design-catalog.ts",
+      "destinationSha256": "cca5943998e747b8616362e0ec3738252903a4f4a547f2d6ac4158ae801df949",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "lib/design-detect-contract.ts",
+      "sourceBlob": "c4beb414141bc334df8e13ac7aef69d75f944291",
+      "destination": "plugins/bontaflowstack/runtime/lib/design-detect-contract.ts",
+      "destinationSha256": "9017feb4c0f989cb1ad89b47f55356c5cdf373618dc5f9f9592024f78f9f34c4",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "lib/design-md.ts",
+      "sourceBlob": "833fae84e80e114d749ae7ee6d4657c1d429381f",
+      "destination": "plugins/bontaflowstack/runtime/lib/design-md.ts",
+      "destinationSha256": "785f54fc62388d26ee8d7719df68378849e77791d5b987ab05bace15c0e53473",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "lib/egress-receipt.ts",
+      "sourceBlob": "01882ebcf30a213f60de9a0770edcaf3223439f2",
+      "destination": "plugins/bontaflowstack/runtime/lib/egress-receipt.ts",
+      "destinationSha256": "2b3553ca4f0d180532cd0160e9c64cbe661219f12e86463ce66cea56c938e0f0",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "lib/error-handling.ts",
+      "sourceBlob": "81420253b61b1d8e5884264398eb259a45110a91",
+      "destination": "plugins/bontaflowstack/runtime/lib/error-handling.ts",
+      "destinationSha256": "d7426952d78b6ff23e477c4974ac7825cbf8cc69d260f37a6daadef497b632b0",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "lib/frontend-scope.ts",
+      "sourceBlob": "0b22c9b645b818c8757066c60bbea02d7ae7a0e8",
+      "destination": "plugins/bontaflowstack/runtime/lib/frontend-scope.ts",
+      "destinationSha256": "45c29e130043cc7c1c68b2e413fc1dbbba2d9aecd696c5a9609d40bd01d86cd6",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "lib/fs-atomic.ts",
+      "sourceBlob": "6410618961b828a20f37f614579e897fd3b77938",
+      "destination": "plugins/bontaflowstack/runtime/lib/fs-atomic.ts",
+      "destinationSha256": "369e5aee3e38efeb3b61be40514c1b1b4ff4cc8c6a0036beccdbdd565aa23f9b",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "lib/gbrain-exec.ts",
+      "sourceBlob": "71d5028803b409d6ac5340a92990d890dd8e1102",
+      "destination": "plugins/bontaflowstack/runtime/lib/process-exec.ts",
+      "destinationSha256": "b1ce6c9266041108af535bfdb6fad1f870c0bd79f7d452b1f973d8aea46a174d",
+      "modification": "Retained only neutral Bash invocation and timeout helpers; removed external memory functions. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "lib/is-conductor.ts",
+      "sourceBlob": "3f31c88afafe6567317f19844ee204e2305e12f3",
+      "destination": "plugins/bontaflowstack/runtime/lib/is-conductor.ts",
+      "destinationSha256": "1c44a59475447fa984dc6665cff75c95615364d65aa832dc9f93cdb77aa07fab",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior."
+    },
+    {
+      "source": "lib/jsonl-store.ts",
+      "sourceBlob": "e3992193627753dafdc47919c08ee365bbac9a94",
+      "destination": "plugins/bontaflowstack/runtime/lib/jsonl-store.ts",
+      "destinationSha256": "ba477aa101e988259262a406a6bb45ca2af742faab34ae2fc452dfe23c17867d",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior. Codex adaptation: selected package/project scope and preserved shared behavior."
+    }
+  ],
+  "intentionalBoundary": "Local memory only. No remote memory synchronization, background provider call, pairing, or self-update. Shared process/model/redaction/logging helpers remain.",
+  "resources": [
+    {
+      "source": "scripts/jargon-list.json",
+      "sourceBlob": "e8f321d8ae51c458f9ab48bbb7fdf3789c472c14",
+      "destination": "plugins/bontaflowstack/runtime/scripts/jargon-list.json",
+      "destinationSha256": "b2b6e299e7093b4f8afbd465ec6b915e31424400a7f2442a9a4ed854c6ae1650",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "ETHOS.md",
+      "sourceBlob": "3dbd5e570807a4f11cd75cfcaa8e77cb52d9fb7a",
+      "destination": "plugins/bontaflowstack/runtime/ETHOS.md",
+      "destinationSha256": "aadd52b9cd285fc65d8c2e053e6d1d707f08764b756c6a5833e439a292bfff1a",
+      "modification": "Pinned workflow resource with operational bfstack naming. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "review/checklist.md",
+      "sourceBlob": "d550e6967c17275e549b1a3b5a07086be4ae92d2",
+      "destination": "plugins/bontaflowstack/runtime/review/checklist.md",
+      "destinationSha256": "5541b4feab9d6d724c3410e6ea679a9643a9a9b7f060ef74c9214312539f266b",
+      "modification": "Pinned workflow resource with operational bfstack naming. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "review/design-checklist.md",
+      "sourceBlob": "fab8a7637682330770390001b80311dd2cd2d00a",
+      "destination": "plugins/bontaflowstack/runtime/review/design-checklist.md",
+      "destinationSha256": "b91ae3fdea6c9ac804dff38ef4a8e5f2a44e0a9ee2e213fbf542614c247bac3a",
+      "modification": "Pinned workflow resource with operational bfstack naming. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "review/greptile-triage.md",
+      "sourceBlob": "c3121c546a6859af7be073d874a6a751495a338a",
+      "destination": "plugins/bontaflowstack/runtime/review/greptile-triage.md",
+      "destinationSha256": "04fb1a32a201242a459fac72ed37f9577e9e024c8e9a40d148e458dd7012e930",
+      "modification": "Operational bfstack renaming; executable guard examples resolve through BFSTACK_BIN."
+    },
+    {
+      "source": "review/TODOS-format.md",
+      "sourceBlob": "eb2f4d9418f9930f0ca6af7f8eed6ca5f1685628",
+      "destination": "plugins/bontaflowstack/runtime/review/TODOS-format.md",
+      "destinationSha256": "df6185d7b4e253d9801d0beaad1342642b77b29d7930530c9cb9a294aba9dd60",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "review/specialists/api-contract.md",
+      "sourceBlob": "01a649b1b0f47bb1af78e1614924b80cddbd48fa",
+      "destination": "plugins/bontaflowstack/runtime/review/specialists/api-contract.md",
+      "destinationSha256": "af6e44d38a07017435e6578587d3015a1c2e8d757f757dd0f6e20cee8ba17f36",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "review/specialists/data-migration.md",
+      "sourceBlob": "effc11469c12ec14975cc12036f0e28570d39019",
+      "destination": "plugins/bontaflowstack/runtime/review/specialists/data-migration.md",
+      "destinationSha256": "17acf30280b8fcffb050a61680f2e54767cb20b9ae43a8b259bce9a97b271c21",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "review/specialists/maintainability.md",
+      "sourceBlob": "a2a036f9ca4c77ea4d9b9b38233444772a9eccfc",
+      "destination": "plugins/bontaflowstack/runtime/review/specialists/maintainability.md",
+      "destinationSha256": "2971711fc71d43783f29130ab40047c297144cee4d3524f5897108d5e36fa203",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "review/specialists/performance.md",
+      "sourceBlob": "612aa285d69a3c73da37e766a8da6de489c41a6d",
+      "destination": "plugins/bontaflowstack/runtime/review/specialists/performance.md",
+      "destinationSha256": "de70501e4ba24943dbc8c957a595038d1e69f7c48524d820bab4811e3fa90f51",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "review/specialists/red-team.md",
+      "sourceBlob": "12654da877f4f036e7f994fbd587b8cafe1e1d62",
+      "destination": "plugins/bontaflowstack/runtime/review/specialists/red-team.md",
+      "destinationSha256": "7fa01733db7369e13e812d492fd93d8d13bf2d0a3a494124e8e2810d6293d860",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "review/specialists/security.md",
+      "sourceBlob": "b1d2e30c1ff0cc83d5d4e4e4f4fe5b1f4bd581e2",
+      "destination": "plugins/bontaflowstack/runtime/review/specialists/security.md",
+      "destinationSha256": "cf1ddd4894497b5a59160acf581b610adecc647515315dce9ee674bd6b2a6523",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "review/specialists/simplification.md",
+      "sourceBlob": "913c038bf980bb6edd9710b9a4c32f3278ee65e6",
+      "destination": "plugins/bontaflowstack/runtime/review/specialists/simplification.md",
+      "destinationSha256": "d8a1311756ffd3b67313d693766399f64eef426ecbb0df4fc13c7a2a7322b53c",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "review/specialists/testing.md",
+      "sourceBlob": "b2ea12e57c882ef307daee1abaa7066429b4425f",
+      "destination": "plugins/bontaflowstack/runtime/review/specialists/testing.md",
+      "destinationSha256": "6f9bf95852e190fa497f6be54ad7d1a9956a24fa1c4dc3d21d929d78101df51d",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "plan-devex-review/dx-hall-of-fame.md",
+      "sourceBlob": "99f8bdd216f7c55455c23c33aecfd4c06cc5afc9",
+      "destination": "plugins/bontaflowstack/runtime/plan-devex-review/dx-hall-of-fame.md",
+      "destinationSha256": "b190ba0671c75fff3453c3f237f66ba9e96579d3a4eef6a6a1d4e9f26d8ccc4c",
+      "modification": "Pinned workflow resource with operational bfstack naming. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "bin/gstack-pr-title-rewrite.sh",
+      "sourceBlob": "8251f621f28bfcf96e68cf8c832a0fbe2c421470",
+      "destination": "plugins/bontaflowstack/runtime/bin/bfstack-pr-title-rewrite.sh",
+      "destinationSha256": "d45da939b39a818b73e3c291363c67b5789f541a1c7354cce80f62933349d13f",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "lib/redact-audit-log.ts",
+      "sourceBlob": "8ea03c5bf9bdab3dfb076e879bbc4ca21c3a295e",
+      "destination": "plugins/bontaflowstack/runtime/lib/redact-audit-log.ts",
+      "destinationSha256": "c3bbcf8a0e05a6da3a7136ae0deb9ada4b39f76fdc27a7c442a328c47c9d8687",
+      "modification": "Pinned workflow resource with operational bfstack naming."
+    },
+    {
+      "source": "lib/redact-engine.ts",
+      "sourceBlob": "9d76c90243e97bafab73ca79376aa2fef985cad5",
+      "destination": "plugins/bontaflowstack/runtime/lib/redact-engine.ts",
+      "destinationSha256": "3215f85fda02677c4dc9f702d31fc5467783df46455daf950e6abe841690869e",
+      "modification": "Pinned shared redaction engine included with its local pattern dependency for packaged bfstack-redact execution. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "lib/redact-patterns.ts",
+      "sourceBlob": "b6cfc6c01b9e0c2ca5d388a847234669ef61516a",
+      "destination": "plugins/bontaflowstack/runtime/lib/redact-patterns.ts",
+      "destinationSha256": "f331c243e7457080a86d7382ab8423ec399c900f4a948d2ba0234daa95a8e7ac",
+      "modification": "Pinned local dependency of the packaged redaction engine; behavior retained byte-for-byte. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "lib/fs-utils.ts",
+      "sourceBlob": "dce4daf336376eb9e925161dfad8ea64f58cbfd1",
+      "destination": "plugins/bontaflowstack/runtime/lib/fs-utils.ts",
+      "destinationSha256": "fd669635375068b7414dfe64b67699bbe2d56de94d061ecc560d6255f1bd8373",
+      "modification": "Pinned local filesystem helper required by bfstack-redact; behavior retained byte-for-byte. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "lib/bstack-decision.ts",
+      "sourceRevision": "349cad6e655479baee84012131d2a34a4849f46b",
+      "sourceRepository": "https://github.com/BillBalint-SM/bontaflowstack-workbook",
+      "sourceSha256": "fb9e1745db63aa7f91ebd82f0b3060151714013e56577befe52e84d8d827aad3",
+      "license": "MIT",
+      "destination": "plugins/bontaflowstack/runtime/lib/bfstack-decision.ts",
+      "destinationSha256": "71f9723e17ca77e658e5f347618148a90515d6e56d9087d7881ca948a75df33d",
+      "modification": "Restored a missing shared dependency from the pinned local reference; current operational naming and packaged local state. Codex adaptation: selected package/project scope and preserved shared behavior."
+    },
+    {
+      "source": "lib/bin-context.ts",
+      "sourceRevision": "349cad6e655479baee84012131d2a34a4849f46b",
+      "sourceRepository": "https://github.com/BillBalint-SM/bontaflowstack-workbook",
+      "sourceSha256": "0617f3915e53a4bbdd196e4200227f76a27d600bf09ba503329436f989fdc0f1",
+      "license": "MIT",
+      "destination": "plugins/bontaflowstack/runtime/lib/bin-context.ts",
+      "destinationSha256": "25252c8bf9efec20648be27b92daa57bd48a9a7ea067b3f34a34703e21591ea0",
+      "modification": "Restored a missing shared dependency from the pinned local reference; current operational naming and packaged local state. Reduced scope: removed exclusive outbound memory/update hooks and retained local shared behavior."
+    },
+    {
+      "source": "lib/tracker-guard.ts",
+      "sourceRevision": "349cad6e655479baee84012131d2a34a4849f46b",
+      "sourceRepository": "https://github.com/BillBalint-SM/bontaflowstack-workbook",
+      "sourceSha256": "4e69b17fbda632a53ba873fae804c9a1766f39daa0ad6ec511327789c4a0e8ce",
+      "license": "MIT",
+      "destination": "plugins/bontaflowstack/runtime/lib/tracker-guard.ts",
+      "destinationSha256": "4e69b17fbda632a53ba873fae804c9a1766f39daa0ad6ec511327789c4a0e8ce",
+      "modification": "Restored a missing shared dependency from the pinned local reference; current operational naming and packaged local state."
+    },
+    {
+      "source": "lib/version-source.ts",
+      "sourceRevision": "349cad6e655479baee84012131d2a34a4849f46b",
+      "sourceRepository": "https://github.com/BillBalint-SM/bontaflowstack-workbook",
+      "sourceSha256": "91f310715477d6d841a8ef5896b4d711165199ee93e175d6d4fa7e7d11473fba",
+      "license": "MIT",
+      "destination": "plugins/bontaflowstack/runtime/lib/version-source.ts",
+      "destinationSha256": "5aad0d51f8abd46ece8614f56f645fd31bba53c63a1b2a559514929386909e20",
+      "modification": "Restored a missing shared dependency from the pinned local reference; current operational naming and packaged local state."
+    }
+  ],
+  "retired": [
+    {
+      "source": "lib/claude-bin.ts",
+      "sourceBlob": "ff413d33ce3b537a9fab7b367f4c0ac4704cce1e",
+      "destination": "plugins/bontaflowstack/runtime/lib/claude-bin.ts",
+      "destinationSha256": "4eee1db7e2db1ec6afdf67bb69489e1d22198566bf609b4ce99c14f3b8586bb5",
+      "modification": "Operational bfstack renaming; retained pinned helper behavior.",
+      "reason": "Exclusive detached terminal host resolver removed."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Versioned, Windows-profile-scoped optional-question preferences.
+# Legacy project files are intentionally never used for automatic decisions.
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+CMD="${1:---read}"
+shift || true
+
+case "$CMD" in
+  --write|--read|--clear|--check)
+    exec bun "$ROOT_DIR/lib/question-preferences.ts" "$CMD" "$@"
+    ;;
+  --stats)
+    exec bun -e '
+      const fs = require("fs");
+      const path = require("path");
+      const root = process.env.BFSTACK_STATE_ROOT || process.env.BFSTACK_HOME;
+      const file = root && path.join(root, "question-preferences.v2.json");
+      let records = [];
+      try { records = JSON.parse(fs.readFileSync(file, "utf8")).records || []; } catch {}
+      console.log("TOTAL: " + records.length);
+      for (const scope of ["user", "project", "task"]) console.log(scope.toUpperCase() + ": " + records.filter(r => r.scope === scope).length);
+      console.log("ADVISORY: " + records.length);
+    '
+    ;;
+  --help|-h)
+    cat <<'EOF'
+Usage:
+  bfstack-question-preference --write '<JSON>'
+  bfstack-question-preference --read
+  bfstack-question-preference --clear <question_id> [--scope user|project|task]
+
+Write JSON requires question_id, choice, scope, question, options and source.
+Records are advisory until a trusted native host path proves enforcement.
+EOF
+    ;;
+  *)
+    echo "bfstack-question-preference: unknown subcommand '$CMD'" >&2
+    exit 1
+    ;;
+esac

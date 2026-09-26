@@ -1,31 +1,32 @@
-# bstack
+# BontaFlowStack
 
-The [Windows/Codex MVP implementation plan](docs/MVP-PLAN.md) defines the
-independent target package and its release gates. This checkout remains a
-prototype; publishing the plan does not certify the current code for release.
+BontaFlowStack is a Codex Desktop plugin for Windows x64. The plugin identity is
+`bontaflowstack`; its short command and router name is `bfstack`.
 
-bstack is a Windows x64 skill package for Codex. It adapts the engineering
-workflows of [gstack](https://github.com/garrytan/gstack) into an installable
-Codex plugin with its own runtime, state directory and local marketplace.
-The upstream project remains credited under its MIT license in [LICENSE](LICENSE).
+## Install
 
-**Status:** `0.1.0-beta.1` is a local release candidate. It is not yet a
-published or fully accepted release. The supported stable Codex version will
-be named after a native, clean-install test. macOS, Linux, iOS and other agent
-hosts are outside this product's scope.
+Download the complete `bontaflowstack-0.1.4-*.zip` from the
+[v0.1.4 release](https://github.com/BillBalint-SM/bontaflowstack-workbook/releases/tag/v0.1.4).
+Its SHA-256 is
+`53c7ae4021990a3712e89465584c8f8244747b23e343530f3bbec8ffb3f20559`.
+Follow the [Windows installation guide](docs/bontaflowstack/INSTALL-WINDOWS.md).
 
-## Build on Windows
+The ZIP is the installable plugin. This repository contains its first-party
+source, 40 skill definitions, marketplace metadata and attribution. Generated
+binaries, Chromium, bundled tools and installed dependencies are kept in the
+release ZIP because they are required by the installed package and are too
+large for the source tree. Do not install this checkout as a plugin.
 
-Install Git, Bun, Git Bash, jq, PowerShell and Codex, then follow the
-[Windows installation guide](docs/bstack/INSTALL-WINDOWS.md). It covers the
-GitHub clone, build, package check and Codex installation. The built plugin
-contains its own runtime and stores user data under `~/.bstack/state` by
-default. Installing the source `plugin/bstack` directory directly is
-unsupported; use the generated package.
+The source dependency versions are pinned in `runtime/bun.lock`. On Windows,
+`scripts/build-renderers.ps1 -Install -InstallBrowser` builds the renderer
+outputs from the checked-in sources with Bun. This is a development command;
+the published ZIP is the verified installation unit.
 
-## Scope and evidence
+## Verification status
 
-The build currently exports 46 Windows/Codex skill entrypoints. They are
-release candidates until the advertised workflows and their required branches
-have been exercised from the installed package. A successful build or package
-check alone does not establish workflow parity.
+The v0.1.4 ZIP passed the package integrity check. The full native Codex
+Desktop acceptance campaign for this build has **not run**. A valid package
+does not establish that every workflow is accepted.
+
+Source and license information is in [references](docs/references.md) and
+[`plugins/bontaflowstack/licenses`](plugins/bontaflowstack/licenses).

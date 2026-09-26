@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Emit shell-quoted paths for this selected runtime; resolution is read-only.
+set -u
+_state_root="${BFSTACK_STATE_ROOT:-${BFSTACK_HOME:-.bfstack}}"
+_plan_root="${BFSTACK_PLAN_DIR:-$_state_root/plans}"
+_tmp_root="${TMPDIR:-${TMP:-$_state_root/tmp}}"
+case "$_tmp_root" in */) [ "$_tmp_root" != "/" ] && _tmp_root="${_tmp_root%/}" ;; esac
+printf 'BFSTACK_STATE_ROOT=%q\n' "$_state_root"
+printf 'PLAN_ROOT=%q\n' "$_plan_root"
+printf 'TMP_ROOT=%q\n' "$_tmp_root"

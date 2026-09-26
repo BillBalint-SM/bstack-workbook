@@ -1,0 +1,20 @@
+{
+    "name":  "bontaflowstack",
+    "interface":  {
+                      "displayName":  "BontaFlowStack"
+                  },
+    "plugins":  [
+                    {
+                        "name":  "bontaflowstack",
+                        "source":  {
+                                       "source":  "local",
+                                       "path":  "./plugins/bontaflowstack"
+                                   },
+                        "policy":  {
+                                       "installation":  "AVAILABLE",
+                                       "authentication":  "ON_INSTALL"
+                                   },
+                        "category":  "Productivity"
+                    }
+                ]
+}
