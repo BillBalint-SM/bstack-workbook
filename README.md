@@ -1,215 +1,215 @@
 # BontaFlowStack
 
-**40 munkafolyamat egy Codex-feladaton belül.** A BontaFlowStack skilleket, helyi projektmemóriát és csomagolt Windows-eszközöket ad a Codex Desktophoz. Egy ötlet tisztázásához, hibakereséshez, böngészős ellenőrzéshez, kódvizsgálathoz vagy dokumentált átadáshoz is választhatsz célzott skillt.
+**Pick the workflow that fits the job.** BontaFlowStack brings 40 Codex skills, local project memory, and packaged Windows tools into Codex Desktop. Use it to shape an idea into a spec, investigate a bug, check a web flow in a browser, review code, or prepare a documented handoff.
 
-![A BontaFlowStack útja a kéréstől az ellenőrzött eredményig](assets/workflow.svg)
+![BontaFlowStack workflow from request to checked result](assets/workflow.svg)
 
-[**0.1.4 letöltése**](https://github.com/BillBalint-SM/bontaflowstack-workbook/releases/tag/v0.1.4) · [Telepítési útmutató](docs/bontaflowstack/INSTALL-WINDOWS.md) · [Mind a 40 skill](#a-40-skill)
+[Download v0.1.4](https://github.com/BillBalint-SM/bontaflowstack-workbook/releases/tag/v0.1.4) · [Windows installation guide](docs/bontaflowstack/INSTALL-WINDOWS.md) · [Browse all 40 skills](#all-40-skills)
 
-> **Kiadási állapot:** a 0.1.4 előzetes kiadás. A ZIP csomagellenőrzése sikeres; a teljes natív Codex Desktop-elfogadás ennél a buildnél még **NOT_RUN**.
+> **Release status:** v0.1.4 is a prerelease. The ZIP package checks passed. Full native Codex Desktop acceptance for this build is still **NOT_RUN**.
 
-## Mire jó?
+## Find the right workflow
 
-A `bfstack` belépőskill a kérésedhez illő munkafolyamatot választja ki. A célt és a már meghozott döntéseket ugyanabban a Codex-feladatban adja tovább a kiválasztott skillnek. Egyetlen skillt közvetlenül is kérhetsz.
+Start with `$bontaflowstack:bfstack` when you know what you want done but do not know which skill to use. The router selects a workflow for the request and carries the goal and decisions into that workflow in the same Codex task. You can also call any skill by name.
 
-### Főbb skillek, tipikus helyzetek
-
-| Ha ezt szeretnéd… | Ezzel indulj |
+| Your task | Start with |
 | --- | --- |
-| Egy ötletből tiszta probléma és specifikáció legyen | `office-hours` → `spec` |
-| A terv termék-, design-, fejlesztői és mérnöki szempontból is átgondolt legyen | `autoplan` |
-| Egy webes folyamat valódi böngészőben kapjon próbát | `qa-only` vagy, javítási felhatalmazással, `qa` |
-| Egy hiba okát megtaláld és a javítást ellenőrizd | `investigate` |
-| Kódot, biztonsági kockázatot vagy változást vizsgálj | `review`, `cso`, `health` |
-| Az átadás előtt összeálljon a bizonyíték, dokumentáció és PR | `ship` |
-| A projekt döntéseit és tanulságait később is megtaláld | `bontaflow-memory`, `context-save`, `learn` |
+| Turn an idea into a clear problem and spec | `office-hours`, then `spec` |
+| Check a plan from product, design, developer, and engineering angles | `autoplan` |
+| Test a web flow in a real browser | `qa-only`, or `qa` if you have authorized fixes |
+| Trace a bug to its cause and check the fix | `investigate` |
+| Review a change, security risks, or project checks | `review`, `cso`, or `health` |
+| Gather the checks and documentation needed for a PR | `ship` |
+| Find decisions and lessons from earlier work | `bontaflow-memory`, `context-save`, or `learn` |
 
 ```mermaid
 flowchart LR
-    A["Ötlet vagy hiba"] --> B["Tisztázás és specifikáció"]
-    B --> C["Arányos tervvizsgálat"]
-    C --> D["Megvalósítás a Codexben"]
-    D --> E["QA, review és dokumentáció"]
-    E --> F["Engedélyezett átadás"]
-    F --> G["Retrospektív és helyi tanulságok"]
+    A["Idea or bug"] --> B["Clarify and specify"]
+    B --> C["Review the plan"]
+    C --> D["Work in Codex"]
+    D --> E["QA, code review, and docs"]
+    E --> F["Authorized handoff"]
+    F --> G["Retrospective and local lessons"]
 ```
 
-A router a kéréshez illő legkisebb skillt választja; a teljes ábrán nem kell végighaladni. Olvasási vagy review-kérés önmagában nem jogosít fájlmódosításra, commitra vagy publikálásra.
+The diagram shows the available path, not a required sequence. The router chooses the smallest workflow that fits the request. A request to read or review does not authorize file edits, commits, or publication.
 
-## Hogyan működik?
+## How it works
 
-A plugin azonosítója `bontaflowstack`; a rövid router- és parancsnév `bfstack`. A skill saját, csomagrelatív PowerShell-belépési ponton át éri el a futtatókat. Az állapot a kiválasztott projekthez és feladathoz kötődik; az alapértelmezett helye `%LOCALAPPDATA%\BontaFlowStack\state`.
+The plugin ID is `bontaflowstack`. Its short router and command name is `bfstack`. Skills reach the packaged tools through a PowerShell launcher inside the plugin. State belongs to the selected project and task; its default location is `%LOCALAPPDATA%\BontaFlowStack\state`.
 
 ```mermaid
 flowchart LR
-    U["Felhasználói kérés"] --> C["Codex Desktop-feladat"]
-    C --> R["bfstack router vagy név szerint választott skill"]
-    R --> S["A 40 skill egyike"]
+    U["Your request"] --> C["Codex Desktop task"]
+    C --> R["bfstack router or named skill"]
+    R --> S["One of 40 skills"]
     S --> L["bfstack.ps1"]
-    L --> T["Csomagolt futtatók és böngésző"]
-    L --> P["Projekt- és feladatszintű helyi állapot"]
-    H["Codexben külön jóváhagyott hookok"] -.-> L
-    S --> V["Ellenőrzött válasz vagy artefaktum"]
+    L --> T["Packaged tools and browser"]
+    L --> P["Local project and task state"]
+    H["Hooks approved separately in Codex"] -.-> L
+    S --> V["Checked answer or artifact"]
 ```
 
-A böngészős skillek a csomagolt Chromiumot használják; látható bejelentkezésnél az ember lép be, majd a folyamat folytatható. A helyi memóriaskill nem végez külső szinkront. Külső GitHub-, webes vagy telepítési művelethez a megfelelő cél és felhatalmazás kell. Hiányzó böngésző, hookbizalom vagy bejelentkezés esetén a workflow konkrét akadályt jelez.
+Browser skills use the packaged Chromium. When a visible login is needed, you sign in and the workflow can continue. Local memory does not sync to an external service. GitHub, web, and installation actions need an authorized target. If a browser, trusted hook, or login is missing, the workflow reports the blocker.
 
-### A belépési pont működési módjai
+### Launcher modes
 
-A skilleknek egy közös, csomagon belüli indítója van: `plugins/bontaflowstack/scripts/bfstack.ps1`. A `-Mode` kapcsoló a technikai belépési útvonalat választja.
+All skills use `plugins/bontaflowstack/scripts/bfstack.ps1`. Its `-Mode` argument selects the entry point.
 
-| Mód | Feladat |
+| Mode | Purpose |
 | --- | --- |
-| `check` | Az alapvető csomagolt runtime ellenőrzése. |
-| `read` | A HOST-szerződés és egy megnevezett skill utasításainak kiolvasása, végrehajtás nélkül. |
-| `run` | Csomagolt runtime-parancs futtatása szabványos bemenetről. |
-| `hook` | Jóváhagyott elővégrehajtási hook kezelése. |
-| `safety` | Projekt- és feladatszintű biztonsági szabály vagy állapot kiértékelése. |
-| `lifecycle` | Jóváhagyott életciklus-esemény kezelése. |
-| `questions` | Kérdésesemény kezelése a támogatott Codex-eszközökhöz. |
+| `check` | Check that the packaged runtime is available. |
+| `read` | Read the host contract and a named skill's instructions without running the skill. |
+| `run` | Run a packaged runtime command supplied on standard input. |
+| `hook` | Handle an approved pre-execution hook event. |
+| `safety` | Evaluate a project or task safety rule or state. |
+| `lifecycle` | Handle an approved lifecycle event. |
+| `questions` | Handle a question event for supported Codex tools. |
 
-A [HOST-szerződés](plugins/bontaflowstack/HOST.md) írja le a határokat és a hibák kezelését. A hookok nem írják felül a Codex saját jogosultságait; a `careful`, `freeze`, `guard` és `unfreeze` működése a megfelelő natív hook megfigyelésétől is függ.
+The [host contract](plugins/bontaflowstack/HOST.md) describes the boundaries and failure behavior. Hooks do not change Codex permissions. `careful`, `freeze`, `guard`, and `unfreeze` also depend on the appropriate native hook being observed.
 
-## A 40 skill
+## All 40 skills
 
-Minden skill a telepített csomagban `bontaflowstack:<név>` alakban hívható. A linkek a kiadott skillleírásokra mutatnak.
+Installed skills use names in the form `bontaflowstack:<name>`. Each link opens the skill's instructions in this repository.
 
-### Indítás és tervezés
+### Start and plan
 
-| Skill | Mikor használd? |
+| Skill | What it does |
 | --- | --- |
-| [bfstack](plugins/bontaflowstack/skills/bfstack/SKILL.md) | Kiválasztja a kéréshez illő skillt; puszta tanácskérésnél csak javasol. |
-| [office-hours](plugins/bontaflowstack/skills/office-hours/SKILL.md) | Üzleti vagy termékötletet tisztáz, feltevéseket vizsgál és rövid briefet készít. |
-| [spec](plugins/bontaflowstack/skills/spec/SKILL.md) | A kérést hatókörrel, viselkedéssel és elfogadási feltételekkel rendelkező specifikációvá alakítja. |
-| [autoplan](plugins/bontaflowstack/skills/autoplan/SKILL.md) | Az arányos tervvizsgálatokat ugyanabban a feladatban, egymás után futtatja. |
-| [plan-ceo-review](plugins/bontaflowstack/skills/plan-ceo-review/SKILL.md) | A probléma, érték és hatókör termékoldali kockázatait vizsgálja. |
-| [plan-eng-review](plugins/bontaflowstack/skills/plan-eng-review/SKILL.md) | Architektúrát, helyességet, teszteket és megvalósíthatóságot vizsgál. |
-| [plan-design-review](plugins/bontaflowstack/skills/plan-design-review/SKILL.md) | UI-terv hierarchiáját, állapotait, reszponzivitását és hozzáférhetőségét nézi át. |
-| [plan-devex-review](plugins/bontaflowstack/skills/plan-devex-review/SKILL.md) | A tervezett API, CLI, SDK és fejlesztői belépés használhatóságát elemzi. |
-| [plan-tune](plugins/bontaflowstack/skills/plan-tune/SKILL.md) | Helyi kérdezési preferenciákat és profilt tekint át vagy kifejezett kérésre módosít. |
+| [bfstack](plugins/bontaflowstack/skills/bfstack/SKILL.md) | Chooses a skill for the request. If you only ask for advice, it recommends one. |
+| [office-hours](plugins/bontaflowstack/skills/office-hours/SKILL.md) | Clarifies a business or product idea, tests assumptions, and writes a short brief. |
+| [spec](plugins/bontaflowstack/skills/spec/SKILL.md) | Turns a request into a spec with scope, behavior, and acceptance criteria. |
+| [autoplan](plugins/bontaflowstack/skills/autoplan/SKILL.md) | Runs the relevant plan reviews in sequence within the same task. |
+| [plan-ceo-review](plugins/bontaflowstack/skills/plan-ceo-review/SKILL.md) | Checks the product problem, value, and scope. |
+| [plan-eng-review](plugins/bontaflowstack/skills/plan-eng-review/SKILL.md) | Reviews architecture, correctness, tests, and feasibility. |
+| [plan-design-review](plugins/bontaflowstack/skills/plan-design-review/SKILL.md) | Reviews UI hierarchy, states, responsive behavior, and accessibility. |
+| [plan-devex-review](plugins/bontaflowstack/skills/plan-devex-review/SKILL.md) | Checks the planned API, CLI, SDK, and developer onboarding. |
+| [plan-tune](plugins/bontaflowstack/skills/plan-tune/SKILL.md) | Reads local question preferences and profile settings, or changes them when asked. |
 
-### Design és böngésző
+### Design and browser
 
-| Skill | Mikor használd? |
+| Skill | What it does |
 | --- | --- |
-| [design-consultation](plugins/bontaflowstack/skills/design-consultation/SKILL.md) | Briefből koherens designrendszert és jóváhagyható irányt dolgoz ki. |
-| [design-shotgun](plugins/bontaflowstack/skills/design-shotgun/SKILL.md) | Több különböző vizuális irányt tesz összehasonlíthatóvá. |
-| [design-html](plugins/bontaflowstack/skills/design-html/SKILL.md) | Elfogadott irányból reszponzív HTML-t vagy projektbeli komponenst készít és renderelve ellenőriz. |
-| [design-review](plugins/bontaflowstack/skills/design-review/SKILL.md) | Valódi UI-kimeneten keres vizuális és interakciós hibákat. |
-| [browse](plugins/bontaflowstack/skills/browse/SKILL.md) | Oldalt olvas, felületet vizsgál, képernyőképet készít és engedélyezett böngészős műveletet végez. |
-| [open-bfstack-browser](plugins/bontaflowstack/skills/open-bfstack-browser/SKILL.md) | Láthatóan megnyitja a csomagolt böngészőt, például kézi bejelentkezéshez. |
-| [scrape](plugins/bontaflowstack/skills/scrape/SKILL.md) | Egy megadott oldalból ellenőrzött strukturált adatot vagy forráshoz kötött választ ad. |
-| [skillify](plugins/bontaflowstack/skills/skillify/SKILL.md) | Sikeres scrape-próbából tesztelt, újrahasználható böngészőskillt készít a megadott hatókörben. |
-| [benchmark](plugins/bontaflowstack/skills/benchmark/SKILL.md) | Valós oldalteljesítményt mér és kompatibilis mérési alapokkal vet össze. |
+| [design-consultation](plugins/bontaflowstack/skills/design-consultation/SKILL.md) | Develops a design system and a direction you can approve from a brief. |
+| [design-shotgun](plugins/bontaflowstack/skills/design-shotgun/SKILL.md) | Makes distinct visual directions easy to compare. |
+| [design-html](plugins/bontaflowstack/skills/design-html/SKILL.md) | Builds responsive HTML or a project component from an approved direction and checks the rendered result. |
+| [design-review](plugins/bontaflowstack/skills/design-review/SKILL.md) | Looks for visual and interaction problems in rendered UI. |
+| [browse](plugins/bontaflowstack/skills/browse/SKILL.md) | Reads pages, inspects interfaces, captures screenshots, and performs authorized browser actions. |
+| [open-bfstack-browser](plugins/bontaflowstack/skills/open-bfstack-browser/SKILL.md) | Opens the packaged browser visibly, for example when you need to sign in. |
+| [scrape](plugins/bontaflowstack/skills/scrape/SKILL.md) | Extracts structured data or a source-backed answer from one requested page. |
+| [skillify](plugins/bontaflowstack/skills/skillify/SKILL.md) | Turns a successful scrape into a tested, reusable browser skill within the requested scope. |
+| [benchmark](plugins/bontaflowstack/skills/benchmark/SKILL.md) | Measures real page performance and compares compatible runs. |
 
-### Hibakeresés és minőség
+### Investigate and check
 
-| Skill | Mikor használd? |
+| Skill | What it does |
 | --- | --- |
-| [investigate](plugins/bontaflowstack/skills/investigate/SKILL.md) | Hibát reprodukál, a valódi hívókon át okot keres, majd engedélyezett javítást ellenőriz. |
-| [review](plugins/bontaflowstack/skills/review/SKILL.md) | Megadott változást vizsgál helyesség, hatókör és regresszió szempontjából. |
-| [cso](plugins/bontaflowstack/skills/cso/SKILL.md) | Kódbázis vagy változás biztonsági kockázatait és bizalmi határait auditálja. |
-| [health](plugins/bontaflowstack/skills/health/SKILL.md) | A projekt meglévő minőségellenőrzéseit futtatja és a tényleges eredményt jelenti. |
-| [qa-only](plugins/bontaflowstack/skills/qa-only/SKILL.md) | Engedélyezett webalkalmazást tesztel, reprodukálható hibákat jelent kódmódosítás nélkül. |
-| [qa](plugins/bontaflowstack/skills/qa/SKILL.md) | Körülhatárolt webes folyamatot tesztel, felhatalmazott hibákat javít és újrapróbál. |
-| [devex-review](plugins/bontaflowstack/skills/devex-review/SKILL.md) | Valódi első sikerút és hibaút alapján vizsgálja a fejlesztői élményt. |
-| [document-generate](plugins/bontaflowstack/skills/document-generate/SKILL.md) | Hiányzó projekt- vagy moduldokumentációt ír ellenőrzött kódból és példákból. |
-| [document-release](plugins/bontaflowstack/skills/document-release/SKILL.md) | Meglévő dokumentációt igazít egy ellenőrzött változáshoz. |
+| [investigate](plugins/bontaflowstack/skills/investigate/SKILL.md) | Reproduces a bug, traces its cause through real callers, and checks an authorized fix. |
+| [review](plugins/bontaflowstack/skills/review/SKILL.md) | Reviews a specified change for correctness, scope, and regressions. |
+| [cso](plugins/bontaflowstack/skills/cso/SKILL.md) | Audits security risks and trust boundaries in a codebase or change. |
+| [health](plugins/bontaflowstack/skills/health/SKILL.md) | Runs the project's existing checks and reports what they actually found. |
+| [qa-only](plugins/bontaflowstack/skills/qa-only/SKILL.md) | Tests an authorized web app and reports reproducible bugs without changing code. |
+| [qa](plugins/bontaflowstack/skills/qa/SKILL.md) | Tests a scoped web flow, fixes authorized defects, and checks again. |
+| [devex-review](plugins/bontaflowstack/skills/devex-review/SKILL.md) | Tries the developer's first successful path and failure path. |
+| [document-generate](plugins/bontaflowstack/skills/document-generate/SKILL.md) | Writes missing project or module docs from checked code and examples. |
+| [document-release](plugins/bontaflowstack/skills/document-release/SKILL.md) | Brings existing docs up to date with a checked change. |
 
-### Átadás és üzemeltetés
+### Ship and operate
 
-| Skill | Mikor használd? |
+| Skill | What it does |
 | --- | --- |
-| [setup-deploy](plugins/bontaflowstack/skills/setup-deploy/SKILL.md) | Megadott célra helyi deploy-beállításokat vizsgál vagy készít elő. |
-| [ship](plugins/bontaflowstack/skills/ship/SKILL.md) | Ellenőrzést, review-t és dokumentációt köt össze az engedélyezett commit, push és PR előtt. |
-| [land-and-deploy](plugins/bontaflowstack/skills/land-and-deploy/SKILL.md) | Konkrét PR készenlétét ellenőrzi, majd felhatalmazással merge-el vagy telepít és visszaellenőriz. |
-| [landing-report](plugins/bontaflowstack/skills/landing-report/SKILL.md) | A kiválasztott repó átadási sorát és blokkolóit olvassa, Git-módosítás nélkül. |
-| [retro](plugins/bontaflowstack/skills/retro/SKILL.md) | Megadott Git-időszak szállítási és minőségi tanulságait összegzi. |
+| [setup-deploy](plugins/bontaflowstack/skills/setup-deploy/SKILL.md) | Inspects or prepares local deployment settings for a named target. |
+| [ship](plugins/bontaflowstack/skills/ship/SKILL.md) | Pulls together checks, review, and docs before an authorized commit, push, or PR. |
+| [land-and-deploy](plugins/bontaflowstack/skills/land-and-deploy/SKILL.md) | Checks a specific PR, then merges or deploys with authorization and verifies the result. |
+| [landing-report](plugins/bontaflowstack/skills/landing-report/SKILL.md) | Reads a repository's delivery queue and blockers without changing Git state. |
+| [retro](plugins/bontaflowstack/skills/retro/SKILL.md) | Summarizes delivery and quality lessons from a specified Git period. |
 
-### Helyi kontextus és memória
+### Local context and memory
 
-| Skill | Mikor használd? |
+| Skill | What it does |
 | --- | --- |
-| [bontaflow-memory](plugins/bontaflowstack/skills/bontaflow-memory/SKILL.md) | Projektbeli döntéseket, tanulságokat és futáselőzményeket olvas vagy rögzít helyben. |
-| [context-save](plugins/bontaflowstack/skills/context-save/SKILL.md) | Git-állapotot, döntéseket és hátralévő munkát ment folytatható pillanatképként. |
-| [context-restore](plugins/bontaflowstack/skills/context-restore/SKILL.md) | A mentett helyi kontextust visszaolvassa és összefoglalja. |
-| [learn](plugins/bontaflowstack/skills/learn/SKILL.md) | Helyi tanulságokat keres, vizsgál, ad hozzá, exportál vagy ritkít. |
+| [bontaflow-memory](plugins/bontaflowstack/skills/bontaflow-memory/SKILL.md) | Reads or records project decisions, lessons, and run history locally. |
+| [context-save](plugins/bontaflowstack/skills/context-save/SKILL.md) | Saves Git state, decisions, and remaining work as a snapshot for later. |
+| [context-restore](plugins/bontaflowstack/skills/context-restore/SKILL.md) | Reads and summarizes a saved local snapshot. |
+| [learn](plugins/bontaflowstack/skills/learn/SKILL.md) | Searches, reviews, adds, exports, or prunes local lessons. |
 
-### Munkahatárok
+### Work boundaries
 
-| Skill | Mikor használd? |
+| Skill | What it does |
 | --- | --- |
-| [careful](plugins/bontaflowstack/skills/careful/SKILL.md) | A feladatban figyelmeztet a romboló parancsokra. |
-| [freeze](plugins/bontaflowstack/skills/freeze/SKILL.md) | Az engedélyezett szerkesztést egy projektbeli könyvtárra korlátozza. |
-| [guard](plugins/bontaflowstack/skills/guard/SKILL.md) | Együtt alkalmaz rombolóparancs-figyelmeztetést és szerkesztési határt. |
-| [unfreeze](plugins/bontaflowstack/skills/unfreeze/SKILL.md) | A jelen feladat szerkesztési határát oldja fel, a careful figyelmeztetést megtartva. |
+| [careful](plugins/bontaflowstack/skills/careful/SKILL.md) | Warns about destructive commands during the task. |
+| [freeze](plugins/bontaflowstack/skills/freeze/SKILL.md) | Limits allowed edits to one project directory. |
+| [guard](plugins/bontaflowstack/skills/guard/SKILL.md) | Combines destructive-command warnings with an edit boundary. |
+| [unfreeze](plugins/bontaflowstack/skills/unfreeze/SKILL.md) | Clears the current task's edit boundary while keeping `careful` warnings. |
 
-## Mi van a telepíthető csomagban?
+## What comes in the ZIP
 
-A Release ZIP az alábbi eszközöket **a plugin mellett** tartalmazza; a felhasználói telepítéshez nem kell ezeket külön a rendszerre tenni.
+The Release ZIP includes these tools alongside the plugin. You do not need to install them separately for the packaged workflows.
 
-| Összetevő | Szerep |
+| Component | Used for |
 | --- | --- |
-| PowerShell-indító és `bfstack` segédparancsok | A skillek, hookok és futtatók közös belépési pontjai. |
-| Bun 1.4.2, Node.js 24.21.0 | A csomagolt JavaScript és TypeScript futtatása. |
-| Portable Git / Git Bash 2.55.0.windows.3, jq 1.8.2 | Scriptfuttatás, Git-műveletek és JSON-feldolgozás. |
-| Playwright 1.62.1 és csomagolt Chromium | Helyi böngészős ellenőrzés, képernyőkép és webes munkafolyamat. |
-| `browse.exe`, `find-browse.exe`, `design.exe` | A böngészős és designfeladatok előre fordított belépési pontjai. |
-| Böngészőkiegészítő és HTML-renderelő | Felületvizsgálat és designmegjelenítés, a csomag saját erőforrásaiból. |
-| Helyi memória- és naplósegédek | Projektbeli döntések, tanulságok, checkpointok és futási események. |
-| Codex-hookok | Safety-, kérdés- és lifecycle-megfigyelés, külön natív bizalmi döntéssel. |
+| PowerShell launcher and `bfstack` helper commands | Shared entry points for skills, hooks, and packaged tools. |
+| Bun 1.4.2 and Node.js 24.21.0 | Running packaged JavaScript and TypeScript. |
+| Portable Git / Git Bash 2.55.0.windows.3 and jq 1.8.2 | Shell scripts, Git operations, and JSON processing. |
+| Playwright 1.62.1 and packaged Chromium | Browser checks, screenshots, and web workflows. |
+| `browse.exe`, `find-browse.exe`, `design.exe` | Prebuilt entry points for browser and design tasks. |
+| Browser extension and HTML renderer | Inspecting interfaces and rendering designs from packaged resources. |
+| Local memory and log helpers | Project decisions, lessons, checkpoints, and run events. |
+| Codex hooks | Safety, question, and lifecycle events, subject to separate approval in Codex. |
 
-**A teljes telepítéshez a Release ZIP-et használd.** A GitHub „Code → Download ZIP” archívuma csak a fejlesztői forrást tartalmazza.
+**Install from the Release ZIP.** GitHub's "Code → Download ZIP" contains the development source without the packaged binaries and dependencies.
 
-## Telepítés Windows x64 rendszeren
+## Install on Windows x64
 
 ```mermaid
 flowchart TB
-    A["Release ZIP és SHA-256"] --> B["Hash ellenőrzése"]
-    B --> C["Kibontás stabil helyre"]
-    C --> D["A kibontott gyökér megnyitása Codex Desktopban"]
-    D --> E["Plugins Directory: BontaFlowStack telepítése"]
-    E --> F["Hookok külön áttekintése a Settings / Hooks alatt"]
-    F --> G["Új Codex-feladat: bontaflowstack:bfstack"]
+    A["Release ZIP and SHA-256"] --> B["Check the hash"]
+    B --> C["Extract to a stable directory"]
+    C --> D["Open the extracted root in Codex Desktop"]
+    D --> E["Install BontaFlowStack in Plugins Directory"]
+    E --> F["Review hooks in Settings / Hooks"]
+    F --> G["New Codex task: bontaflowstack:bfstack"]
 ```
 
-1. A [v0.1.4 Release-ből](https://github.com/BillBalint-SM/bontaflowstack-workbook/releases/tag/v0.1.4) töltsd le a `bontaflowstack-0.1.4-deb14b0fadc2424baeb0ad06511c73c6.zip` fájlt és a mellette lévő `.sha256` fájlt.
-2. Ellenőrizd a ZIP SHA-256 értékét. A várt érték: `53c7ae4021990a3712e89465584c8f8244747b23e343530f3bbec8ffb3f20559`. A letöltési könyvtárban futtatva:
+1. Download `bontaflowstack-0.1.4-deb14b0fadc2424baeb0ad06511c73c6.zip` and its `.sha256` file from the [v0.1.4 release](https://github.com/BillBalint-SM/bontaflowstack-workbook/releases/tag/v0.1.4).
+2. Check the ZIP's SHA-256 hash. The expected value is `53c7ae4021990a3712e89465584c8f8244747b23e343530f3bbec8ffb3f20559`. Run this in the download directory:
 
    ```powershell
    (Get-FileHash -LiteralPath '.\bontaflowstack-0.1.4-deb14b0fadc2424baeb0ad06511c73c6.zip' -Algorithm SHA256).Hash
    ```
 
-3. Bontsd ki a ZIP-et stabil, írható könyvtárba. A `.agents/plugins/marketplace.json` és a `plugins/bontaflowstack/` könyvtár maradjon a kibontott gyökér alatt.
-4. A kibontott gyökeret nyisd meg Codex Desktop-projektként, indítsd újra a Desktopot, majd a **Plugins Directory** nézetben telepítsd a **BontaFlowStack** plugint.
-5. A **Settings → Hooks** alatt nézd át a négy BontaFlowStack-hookot. A bizalom külön, natív döntés; a plugin telepítése önmagában nem jelenti a hookok jóváhagyását.
-6. Új Codex-feladatban ellenőrizd, hogy megjelenik a `$bontaflowstack:bfstack` belépőskill.
+3. Extract the ZIP to a stable, writable directory. Keep `.agents/plugins/marketplace.json` and `plugins/bontaflowstack/` under the extracted root.
+4. Open that root as a Codex Desktop project, restart Desktop, and install **BontaFlowStack** from **Plugins Directory**.
+5. Review the four BontaFlowStack hooks under **Settings → Hooks**. Installing the plugin does not approve its hooks.
+6. Start a new Codex task and check that `$bontaflowstack:bfstack` is available.
 
-A részletes [Windows telepítési útmutató](docs/bontaflowstack/INSTALL-WINDOWS.md) a hookok határait és az eltávolítást is leírja. Eltávolításhoz a Codex natív pluginfelületét használd; a külön helyi állapot felhasználói adat, nem törlődik automatikusan.
+The [Windows installation guide](docs/bontaflowstack/INSTALL-WINDOWS.md) covers hook boundaries and removal. Use Codex's plugin interface to uninstall. Local state is user data and is not removed automatically.
 
-## Első lépések
+## First steps
 
-A routert természetes nyelvű kéréssel indíthatod. Példák:
+You can give the router an ordinary request:
 
 ```text
 $bontaflowstack:bfstack
-Tisztázd ezt az ötletet, majd készíts hozzá ellenőrizhető specifikációt.
+Clarify this idea, then write a spec with testable acceptance criteria.
 ```
 
 ```text
 $bontaflowstack:bfstack
-Nézd át ezt a változást helyesség és regresszió szempontjából. Csak jelents; ne módosíts fájlt.
+Review this change for correctness and regressions. Report findings only; do not edit files.
 ```
+
+Or call a skill directly:
 
 ```text
 $bontaflowstack:bontaflow-memory
-Olvasd ki a projekt legutóbbi tanulságait. Ha nincs bejegyzés, jelentsd üresként.
+Read the project's latest lessons. If there are none, report an empty result.
 ```
 
-A név szerint megadott skill közvetlenül is használható. A munkahatárt és az engedélyezett külső műveleteket a kérésben érdemes pontosítani.
+State the work boundary and any authorized external actions in your request.
 
-## Forrás, fejlesztés és licencek
+## Source and licenses
 
-A `main` tartalmazza a 40 skillt és a futtató forrását. A függőségek a [`runtime/bun.lock`](runtime/bun.lock) fájlban rögzítettek; a [`scripts/build-renderers.ps1`](scripts/build-renderers.ps1) Windows alatt újraépíti a renderer-kimeneteket.
+`main` contains the 40 skills and runner source. Dependencies are pinned in [`runtime/bun.lock`](runtime/bun.lock), and [`scripts/build-renderers.ps1`](scripts/build-renderers.ps1) rebuilds the renderer outputs on Windows.
 
-A projekt forrásait és átvételi nyilvántartását a [forrásjegyzék](docs/references.md) írja le; a [licencek és eredetjelölések](plugins/bontaflowstack/licenses) a plugin részei. A csomag működési nevei `bontaflowstack` és `bfstack`; a nyilvántartás régi `source` fájlnevei kizárólag a származást jelölik.
+[Source references](docs/references.md) record the project's origins and attribution. The plugin includes its [licenses and notices](plugins/bontaflowstack/licenses). Its operational names are `bontaflowstack` and `bfstack`; old filenames under `source` in the provenance records identify their original sources.

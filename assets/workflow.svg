@@ -1,32 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="350" viewBox="0 0 1200 350" role="img" aria-labelledby="title description">
-  <title id="title">BontaFlowStack: a kéréstől az ellenőrzött eredményig</title>
-  <desc id="description">Négy állomásból álló folyamat: kérés, tervezés, munka, ellenőrzött eredmény. A munkát negyven célzott skill támogatja egy Codex feladaton belül.</desc>
+  <title id="title">BontaFlowStack: from request to checked result</title>
+  <desc id="description">Four stages: request, planning, work, and checked result. Forty focused skills support the work within one Codex task.</desc>
   <rect width="1200" height="350" rx="22" fill="#0c1725"/>
   <path d="M54 270H1146" stroke="#315063" stroke-width="2"/>
   <path d="M54 270H1020" stroke="#2dd4bf" stroke-width="3"/>
   <text x="55" y="75" fill="#f2f7f7" font-family="Segoe UI,Arial,sans-serif" font-size="42" font-weight="700" letter-spacing="-1">BontaFlowStack</text>
-  <text x="56" y="112" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="21">A kérésből követhető, ellenőrzött munkafolyamat.</text>
-  <text x="998" y="76" fill="#2dd4bf" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="700" text-anchor="end">40 célzott skill</text>
-  <text x="1137" y="76" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="18" text-anchor="end">egy csomagban</text>
+  <text x="56" y="112" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="21">From request to checked result.</text>
+  <text x="998" y="76" fill="#2dd4bf" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="700" text-anchor="end">40 focused skills</text>
+  <text x="1137" y="76" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="18" text-anchor="end">one package</text>
 
   <circle cx="78" cy="270" r="16" fill="#fbbf24"/>
   <circle cx="78" cy="270" r="5" fill="#0c1725"/>
-  <text x="55" y="202" fill="#f2f7f7" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Kérés</text>
-  <text x="55" y="231" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="16">Mit szeretnél elérni?</text>
+  <text x="55" y="202" fill="#f2f7f7" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Request</text>
+  <text x="55" y="231" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="16">What do you need done?</text>
 
   <circle cx="370" cy="270" r="16" fill="#2dd4bf"/>
   <circle cx="370" cy="270" r="5" fill="#0c1725"/>
-  <text x="347" y="202" fill="#f2f7f7" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Tervezés</text>
-  <text x="347" y="231" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="16">A megfelelő skill és hatókör.</text>
+  <text x="347" y="202" fill="#f2f7f7" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Plan</text>
+  <text x="347" y="231" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="16">The right skill and scope.</text>
 
   <circle cx="698" cy="270" r="16" fill="#2dd4bf"/>
   <circle cx="698" cy="270" r="5" fill="#0c1725"/>
-  <text x="675" y="202" fill="#f2f7f7" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Munka</text>
-  <text x="675" y="231" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="16">Helyi futtatók, böngésző, kontextus.</text>
+  <text x="675" y="202" fill="#f2f7f7" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Work</text>
+  <text x="675" y="231" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="16">Local tools, browser, context.</text>
 
   <circle cx="1020" cy="270" r="16" fill="#2dd4bf"/>
   <circle cx="1020" cy="270" r="5" fill="#0c1725"/>
-  <text x="997" y="202" fill="#f2f7f7" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Eredmény</text>
-  <text x="997" y="231" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="16">Ellenőrzött, követhető.</text>
+  <text x="997" y="202" fill="#f2f7f7" font-family="Segoe UI,Arial,sans-serif" font-size="25" font-weight="700">Result</text>
+  <text x="997" y="231" fill="#a9c6d0" font-family="Segoe UI,Arial,sans-serif" font-size="16">Checked and traceable.</text>
   <text x="55" y="324" fill="#7896a6" font-family="Segoe UI,Arial,sans-serif" font-size="14">WINDOWS X64 · CODEX DESKTOP · BONTAFLOWSTACK / BFSTACK</text>
 </svg>
