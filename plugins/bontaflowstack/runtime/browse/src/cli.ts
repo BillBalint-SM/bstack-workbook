@@ -1398,10 +1398,8 @@ Refs:           After 'snapshot', use @e1, @e2... as selectors:
 
   let state = await ensureServer(globalFlags);
 
-  if (command === 'stop' && !isVerifiedDaemonState(state)) {
-    throw new Error('[browse] Daemon cannot be verified before stop; leaving it untouched.');
-  }
-
+  // A normal stop is an authenticated request to the live daemon. Process
+  // identity is still required for every direct OS termination above.
   await sendCommand(state, command, commandArgs);
 
   // #2709: after a graceful stop, the daemon has closed Chromium via
