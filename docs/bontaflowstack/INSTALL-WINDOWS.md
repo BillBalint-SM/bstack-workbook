@@ -9,9 +9,9 @@ BontaFlowStack v0.1.4 is a prerelease for Windows x64 Codex Desktop. The owner a
 | Release ZIP and installed files | PASS | Build `deb14b0fadc2424baeb0ad06511c73c6`; 14,163 installed files, with none missing or mismatched. |
 | Native Codex Desktop smoke test | PASS | In Windows Sandbox, `bfstack` handed off to `bontaflow-memory`; a read-only lookup succeeded with zero lessons. |
 | Parallel local agent cases | 4 PASS | `office-hours`: business, creator, and ambiguous-goal branches; `spec`: read local code before asking a question. Separate fixtures stayed unchanged. These were local agent tasks, not native Desktop E2E runs. |
-| Full native Desktop E2E inventory | NOT_RUN | The other skills and the native hook, question, Stop, browser, and failure branches have not been accepted by this campaign. |
+| Reconstructed 0.1.4 Desktop campaign | 205/205 cases dispositioned; full E2E not accepted | 125 narrow-behavior PASS, 3 FAIL, 4 PARTIAL, 72 BLOCKED/NOT_RUN, 1 OUT. Results cover test chats and selected packaged helpers; native skill-catalog activation was not independently verified. This is a new inventory because the earlier authoritative scenario file is unavailable. |
 
-**Release goal:** the owner accepts the evidence above as sufficient for v0.1.4. **Remaining verification goal:** run and record the untested native Desktop workflows before claiming full E2E coverage. Owner acceptance is a release decision, not evidence that the unrun cases passed.
+The owner's v0.1.4 release decision remains the historical release decision. The later campaign does not establish full native Desktop E2E acceptance. PASS means only the stated small branch matched expectations, including expected wait or block behavior. The 72 blocked/not-run cases require their listed prerequisites or a safe, isolated test environment before they can count as passes. [Read the findings and limits](E2E-20260926.md).
 
 ## Install
 

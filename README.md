@@ -6,7 +6,7 @@
 
 [Download v0.1.4](https://github.com/BillBalint-SM/bontaflowstack-workbook/releases/tag/v0.1.4) · [Windows installation guide](docs/bontaflowstack/INSTALL-WINDOWS.md) · [Browse all 40 skills](#all-40-skills)
 
-> **Release status:** The owner accepted v0.1.4 on 2026-09-26 based on the package checks, a native Desktop smoke test, and four local agent cases. The full native Desktop E2E inventory was not run. [Evidence and remaining goals](docs/bontaflowstack/INSTALL-WINDOWS.md#verification-and-release-decision).
+> **Release status:** The owner accepted v0.1.4 on 2026-09-26 based on package checks and a limited smoke test. A later 205-case Desktop campaign found failures and blocked cases, so full native E2E acceptance is **not established**. [Results and limits](docs/bontaflowstack/INSTALL-WINDOWS.md#verification-and-release-decision).
 
 ## Find the right workflow
 
