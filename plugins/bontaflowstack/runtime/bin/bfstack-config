@@ -177,7 +177,7 @@ case "${1:-}" in
     mkdir -p "$STATE_DIR"
     # Write annotated header on first creation
     if [ ! -f "$CONFIG_FILE" ]; then
-      printf '%s' "$CONFIG_HEADER" > "$CONFIG_FILE"
+      printf '%s\n' "$CONFIG_HEADER" > "$CONFIG_FILE"
     fi
     # Drop embedded newlines, then escape sed replacement metacharacters.
     SAFE_VALUE="$(printf '%s' "$VALUE" | head -1)"
