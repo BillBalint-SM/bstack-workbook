@@ -51,6 +51,7 @@ function Assert-ArchiveEntry([string]$Name, [hashtable]$Seen) {
     $Seen[$canonical] = $true
 }
 
+$startedExtraction = $false
 try {
     $archive = [IO.Compression.ZipFile]::OpenRead($package)
     try {
@@ -64,16 +65,17 @@ try {
         $line = (Get-Content -LiteralPath $sidecar -Raw).Trim()
         if ($line -notmatch '^([0-9a-fA-F]{64})  .+$' -or $matches[1].ToLowerInvariant() -ne (Get-FileHash -LiteralPath $package -Algorithm SHA256).Hash.ToLowerInvariant()) { throw 'Package checksum mismatch' }
     }
+    $startedExtraction = $true
     [IO.Compression.ZipFile]::ExtractToDirectory($package, $destination)
     $manifestPath = Join-Path $destination 'package-manifest.json'
     if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) { throw 'package-manifest.json is missing' }
     $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-    if ($manifest.schemaVersion -ne 1 -or $manifest.name -cnotin @('bfstack', 'bontaflowstack') -or $manifest.nativeAcceptance -ne 'NOT_RUN') { throw 'Invalid package manifest' }
+    if ($manifest.schemaVersion -ne 1 -or $manifest.name -cne 'bontaflowstack' -or $manifest.nativeAcceptance -ne 'NOT_RUN') { throw 'Invalid package manifest' }
     $identity = [string]$manifest.name
     $pluginRelativePath = "plugins/$identity"
     $guideRelativePath = "docs/$identity"
-    $expectedPluginDisplayName = if ($identity -eq 'bontaflowstack') { 'BontaFlowStack' } else { 'bfstack' }
-    $expectedMarketplaceDisplayName = if ($identity -eq 'bontaflowstack') { 'BontaFlowStack' } else { 'Bfstack' }
+    $expectedPluginDisplayName = 'BontaFlowStack'
+    $expectedMarketplaceDisplayName = 'BontaFlowStack'
     $expected = @{}
     foreach ($file in @($manifest.files)) {
         if ($file.path -notmatch '^[^/\\]+(/[^/\\]+)*$') { throw "Unsafe manifest path: $($file.path)" }
@@ -102,4 +104,10 @@ try {
         throw 'Marketplace identity does not match package manifest'
     }
     Write-Output "$identity package check PASS: $package"
-} finally { }
+} finally {
+    if ($startedExtraction -and -not $KeepExtraction -and (Test-Path -LiteralPath $destination)) {
+        Assert-ChildPath $destination $temporaryRoot 'Extraction cleanup' | Out-Null
+        Assert-SafeRoot $destination 'Extraction cleanup'
+        Remove-Item -LiteralPath $destination -Recurse -Force
+    }
+}
