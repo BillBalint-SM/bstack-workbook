@@ -1,6 +1,17 @@
 # Install BontaFlowStack on Windows
 
-BontaFlowStack v0.1.4 is a prerelease for Windows x64 Codex Desktop. The Release ZIP passed its package checks. In a separate Windows Sandbox smoke test, the `bfstack` router and `bontaflow-memory` read-only workflow ran; memory returned zero lessons. The full native acceptance campaign remains `NOT_RUN`.
+BontaFlowStack v0.1.4 is a prerelease for Windows x64 Codex Desktop. The owner accepted this release on 2026-09-26 using the verification described below.
+
+## Verification and release decision
+
+| Evidence | Result | Scope |
+| --- | --- | --- |
+| Release ZIP and installed files | PASS | Build `deb14b0fadc2424baeb0ad06511c73c6`; 14,163 installed files, with none missing or mismatched. |
+| Native Codex Desktop smoke test | PASS | In Windows Sandbox, `bfstack` handed off to `bontaflow-memory`; a read-only lookup succeeded with zero lessons. |
+| Parallel local agent cases | 4 PASS | `office-hours`: business, creator, and ambiguous-goal branches; `spec`: read local code before asking a question. Separate fixtures stayed unchanged. These were local agent tasks, not native Desktop E2E runs. |
+| Full native Desktop E2E inventory | NOT_RUN | The other skills and the native hook, question, Stop, browser, and failure branches have not been accepted by this campaign. |
+
+**Release goal:** the owner accepts the evidence above as sufficient for v0.1.4. **Remaining verification goal:** run and record the untested native Desktop workflows before claiming full E2E coverage. Owner acceptance is a release decision, not evidence that the unrun cases passed.
 
 ## Install
 

@@ -6,7 +6,7 @@
 
 [Download v0.1.4](https://github.com/BillBalint-SM/bontaflowstack-workbook/releases/tag/v0.1.4) · [Windows installation guide](docs/bontaflowstack/INSTALL-WINDOWS.md) · [Browse all 40 skills](#all-40-skills)
 
-> **Release status:** v0.1.4 is a prerelease. The ZIP package checks passed. Full native Codex Desktop acceptance for this build is still **NOT_RUN**.
+> **Release status:** The owner accepted v0.1.4 on 2026-09-26 based on the package checks, a native Desktop smoke test, and four local agent cases. The full native Desktop E2E inventory was not run. [Evidence and remaining goals](docs/bontaflowstack/INSTALL-WINDOWS.md#verification-and-release-decision).
 
 ## Find the right workflow
 
